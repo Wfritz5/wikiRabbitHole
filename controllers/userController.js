@@ -37,7 +37,9 @@ module.exports = {
             .findById({
                 _id: req.params.id
             })
-            .then(dbModel => dbModel.remove())
+            .then(db.RabUrl.remove({
+                "_id": {$in: dbModel.rabUrl}}))
+            .then(dbModel => dbModel.remove())          
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     }
