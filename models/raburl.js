@@ -16,7 +16,7 @@ var RabUrlSchema = new Schema ({
 });
 
 //This creates the model from the abive schema, using mongoose's model method
-var RabUrl = mongoos.model("RabUrl", RabUrlSchema);
+var RabUrl = mongoose.model("RabUrl", RabUrlSchema);
 
 // Export the RabUrl model...so somebody can use it
 module.exports = RabUrl;
