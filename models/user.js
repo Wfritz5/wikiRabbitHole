@@ -14,7 +14,7 @@ const userSchema = new Schema({
     // very very similar to the 'notes' from the mongoose 19-Populate-Exercise
     // Remember that the ref property links these OjectIds to the RabUrl model
     // This allows us to populate the User with all associated RabUrl (Rabbit Urls)
-    rabUrls: [
+    rabUrl: [
         {
             // Store OjectIds in the array
             type: Schema.Types.ObjectId,

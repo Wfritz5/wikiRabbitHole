@@ -30,7 +30,7 @@ var RabUrlSchema = new Schema ({
     keyWords: [],
 });
 
-//This creates the model from the abive schema, using mongoose's model method
+//This creates the model from the above schema, using mongoose's model method
 var RabUrl = mongoose.model("RabUrl", RabUrlSchema);
 
 // Export the RabUrl model...so somebody can use it
