@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const userController = require("../../controllers/raburlController");
+const raburlController = require("../../controllers/raburlController");
 
 router.route("/")
   //  .get(userController.findAll)
