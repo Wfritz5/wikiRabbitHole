@@ -11,8 +11,23 @@ var Schema = mongoose.Schema;
 // The ramification of this is that when a user gets deleted, ALL of that
 // user's RabUrls must get deleted or they will be orphaned.
 var RabUrlSchema = new Schema ({
-    urlString: String,
-    keyWords: []
+    title: {
+        type: String,
+        required: true
+    },
+    summary: {
+        type: String,
+        required: true
+    },
+    urlString: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    keyWords: [],
 });
 
 //This creates the model from the abive schema, using mongoose's model method
