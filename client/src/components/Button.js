@@ -1,16 +1,20 @@
 import React from "react";
+import styled from "styled-components";
 
-// If we want a child component to update or pass data to its parent, we can create a method inside the parent for the update
-// Then bind the method to the parent, and pass it to the child as a prop
+const Input = styled.input`
+border-radius: 3px;
+margin: 0.5em;
+`;
 
-function Button(props) {
+const Button = props => {
 
   return (
     <button 
     type={props.type}
     form={props.id}
     id={props.id}
-    className="" 
+    className=""
+    style={props.style}
     onClick={props.onClick}>
     {props.label}
   </button>

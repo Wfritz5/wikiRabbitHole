@@ -1,19 +1,38 @@
 import React, { Component } from 'react';
 import Button from "./Button"
-// import styled from "styled-components";
+import styled from "styled-components";
 
-// const FormWrapper = styled.section`
-//   padding: 4em;
-// `;
+const Input = styled.input`
+border-radius: 3px;
+margin: 0.5em;
+`;
 
-// const Form = styled.form`
-// padding: 0.5em;
-// margin: 0.5em;
-// border: none;
-// border-radius: 3px;
-// `
+const Form = styled.form`
+padding: 0.5em;
+margin: 0.5em;
+border: none;
+border-radius: 3px;
+`
 
-class SearchBar extends Component {
+const redButton = {
+    backgroundColor: "red",
+    padding: "5px",
+    margin: "5px",
+    borderRadius: "5px",
+    borderColor: "black",
+    color: "black"
+  };
+
+const blueButton = {
+    backgroundColor: "blue",
+    padding: "5px",
+    margin: "5px",
+    borderRadius: "5px",
+    borderColor: "black",
+    color: "white"
+  };  
+
+class SearchForm extends Component {
     state = {
         term: ""
     }
@@ -25,9 +44,10 @@ class SearchBar extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const url = `https://en.wikipedia.org/wiki/` + this.state.term
+        const url = `https://en.wikipedia.org/wiki/${this.state.term}`
         alert(`The url is ` + url)
         window.open(url)
+        this.setState({ term: ""})
     };
 
     handleClear = event => {
@@ -38,11 +58,10 @@ class SearchBar extends Component {
     render() {
         return (
             <div>
-            <form id="wiki-form" onSubmit={event => event.preventDefault()}>
-            {/* <FormWrapper> */}
+            <Form id="wiki-form" onSubmit={event => event.preventDefault()}>
                 <label htmlFor="wikiSearch">Wikipedia Search</label>
                 <br />
-                <input    
+                <Input    
                     type="text" 
                     name="wikiSearch" 
                     id="wikiSearch" 
@@ -50,23 +69,26 @@ class SearchBar extends Component {
                     value={this.state.term}
                     onChange={this.handleInputChange}
                 />
+                {/* This button will submit the form */}
                 <Button 
                   id={"submit-search"}
                   label={"Submit"}
                   onClick={this.handleSubmit}
                   type={"submit"}
+                  style={blueButton}
                 />
+                {/* This button will clear the search field */}
                   <Button 
                   id={"clear-search"}
                   label={"Clear"}
                   onClick={() => this.setState({ term: ""})}
                   type={"reset"}
+                  style={blueButton}
                   />
-            {/* </FormWrapper> */}
-            </form>
+            </Form>
             </div>
         );
     }
 }
 
-export default SearchBar;
+export default SearchForm;
