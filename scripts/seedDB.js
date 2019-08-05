@@ -7,8 +7,7 @@ mongoose.connect(
         useNewUrlParser: true
     });
 
-const raburlSeed = [
-    {
+const raburlSeed = [{
         title: "Dagobah rules!",
         summary: "Global warming run amok",
         urlString: "https://en.wikipedia.org/wiki/Dagobah",
@@ -38,7 +37,7 @@ const userSeed = [{
 db.RabUrl
     .deleteMany({})
     .then(() => db.RabUrl.collection.insertMany(raburlSeed))
-   // .then(data => {console.log(data.result)})
+    // .then(data => {console.log(data.result)})
     .then(data => {
         console.log(data.result.n + " url records insterted!")
     })
