@@ -6,6 +6,10 @@ function Login(props) {
     return (
         <div className="login">
             <h2 className="loginTitle title-font">Login</h2>
+            <hr />
+            {props.message ? (
+                <Alert className="animated fadeIn" color="danger">{props.message}</Alert>
+            ) : (<></>)}
             <Form>
                 <FormGroup>
                     <Label for="username">Username</Label>
@@ -17,6 +21,15 @@ function Login(props) {
                         value={props.username}
                         onChange={props.handleInputChange}
                     />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="password">Password</Label>
+                    <Input type="password"
+                        name="password"
+                        id="password"
+                        placeholder="password"
+                        value={props.password}
+                        onChange={props.handleInputChange} />
                 </FormGroup>
                 <Button
                     id="loginButton"

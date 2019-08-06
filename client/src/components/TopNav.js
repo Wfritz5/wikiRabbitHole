@@ -70,7 +70,7 @@ export default class Navigation extends Component {
                                     {this.state.loggedIn ? (
                                         <>
                                             <DropdownItem>
-                                                <NavLink href="/profile">Profile</NavLink>
+                                                {/* <NavLink href="/profile">Profile</NavLink> */}
                                             </DropdownItem>
                                             <DropdownItem>
                                                 <NavLink onClick={this.logout}>Logout</NavLink>

@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, {
+    Component
+} from "react";
 import Login from "../../components/Login";
 import Signup from "../../components/Signup";
 import API from "../../utils/API";
@@ -37,8 +39,7 @@ class Auth extends Component {
                     });
                     console.log("log in successful");
                     window.location.href = '/profile';
-                }
-                else if (user.data.message) {
+                } else if (user.data.message) {
                     this.setState({
                         message: user.data.message
                     })
@@ -73,27 +74,25 @@ class Auth extends Component {
     }
 
     render() {
-        return (
-            <div className="authBox">
-                {(this.props.action === "login") ? (
-                    <Login
+        return (<div className="authBox" > {
+            (this.props.action === "login") ? (<Login
+                username={this.state.username}
+                password={this.state.password}
+                handleLogin={this.handleLogin}
+                handleInputChange={this.handleInputChange}
+                message={this.state.message}
+            />
+            ) : (
+                    <Signup
                         username={this.state.username}
                         password={this.state.password}
-                        handleLogin={this.handleLogin}
+                        confirmPassword={this.state.confirmPassword}
+                        handleSignup={this.handleSignup}
                         handleInputChange={this.handleInputChange}
                         message={this.state.message}
                     />
-                ) : (
-                        <Signup
-                            username={this.state.username}
-                            password={this.state.password}
-                            confirmPassword={this.state.confirmPassword}
-                            handleSignup={this.handleSignup}
-                            handleInputChange={this.handleInputChange}
-                            message={this.state.message}
-                        />
-                    )}
-            </div>
+                )}
+        </div>
         )
     }
 }
