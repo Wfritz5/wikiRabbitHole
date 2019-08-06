@@ -4,7 +4,7 @@ export default {
 
     // logs in user, need to pass parameters
     login: function (loginInfo) {
-        return axios.get("/api/users/login", loginInfo);
+        return axios.post("/api/users/login", loginInfo);
     },
 
     isLoggedIn: function () {
