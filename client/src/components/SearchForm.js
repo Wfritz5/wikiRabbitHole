@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Button from "./Button"
 import styled from "styled-components";
+const axios = require("axios");
+const cheerio = require("cheerio");
 
 const Input = styled.input`
 border-radius: 3px;
@@ -45,9 +47,26 @@ class SearchForm extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const url = `https://en.wikipedia.org/wiki/${this.state.term}`
-        alert(`The url is ` + url)
         window.open(url)
         this.setState({ term: ""})
+        axios.get(url).then(function (response) {
+            // Then, we load that into cheerio and save it to $ for a shorthand selector
+            const $ = cheerio.load(response.data);
+            console.log(response.data)
+            $(".mw-body").each(function (i, element) {
+              // Save an empty result object
+              const result = {};
+              // Add the href of every link, the title, a summary and save them as properties of the result object
+              result.title = $(this)
+              .children("h1#firstHeading").text();
+                result.image = $(this)
+                  .find(".image").attr("href");
+                // result.summary = $(this)
+                //   .find("p").text();
+                result.url = url;
+            console.log(response.data)
+            });
+          });
     };
 
     handleClear = event => {
