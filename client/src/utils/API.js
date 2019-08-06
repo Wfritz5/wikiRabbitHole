@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
     // logs in user
     login: function (loginInfo) {
-        return axios.post("/api/users/login", loginInfo);
+        return axios.get("/api/users/login", loginInfo);
     },
 
     // signs up user, then logs them in
