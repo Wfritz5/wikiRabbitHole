@@ -16,16 +16,14 @@ var RabUrlSchema = new Schema ({
         required: true
     },
     summary: {
-        type: String,
-        required: true
+        type: String
     },
     urlString: {
         type: String,
         required: true
     },
     image: {
-        type: String,
-        required: true
+        type: String
     },
     keyWords: [],
 });

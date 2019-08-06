@@ -5,8 +5,17 @@ router.route("/")
     .get(userController.findAll)
     .post(userController.create);
 
-router
-    .route("/:id")
+router.route("/api/users/login/:username")
+    .get(userController.findByUsername);
+
+router.route("/api/users/signup")
+    .post(userController.create)
+
+router.route("/api/scrape/:id")
+    .get(userController.findById)
+
+
+router.route("/:id")
     .get(userController.findById)
     .put(userController.update)
     .delete(userController.remove);
