@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default {
+
     // logs in user
     login: function (loginInfo) {
         return axios.post("/api/users/login", loginInfo);
@@ -24,5 +25,9 @@ export default {
     // logs out the user
     logout: function () {
         return axios.get("/api/users/logout")
+    },
+    //*scrapes
+    scrape: function () {
+        return axios.get("/api/scrape");
     }
 };
