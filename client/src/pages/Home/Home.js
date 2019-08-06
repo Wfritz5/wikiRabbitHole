@@ -16,7 +16,7 @@ class Home extends Component {
     // viewSavedArticles = () => {}
 
     loggedIn = () => {
-        API.scrape().then(user => {
+        API.isLoggedIn().then(user => {
             if (user.data.loggedIn) {
                 this.setState({
                     loggedIn: true

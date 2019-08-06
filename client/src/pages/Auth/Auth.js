@@ -2,7 +2,7 @@ import React, {
     Component
 } from "react";
 import Login from "../../components/Login";
-import Signup from "../../components/Signup/Signup";
+import Signup from "../../components/Signup";
 import API from "../../utils/API";
 
 class Auth extends Component {
@@ -38,7 +38,7 @@ class Auth extends Component {
                         user: user.data.user
                     });
                     console.log("log in successful");
-                    // window.location.href = '/profile';
+                    window.location.href = '/profile';
                 } else if (user.data.message) {
                     this.setState({
                         message: user.data.message
@@ -61,7 +61,7 @@ class Auth extends Component {
                         user: user.data.user
                     });
                     console.log("log in successful");
-                    window.location.href = '/';
+                    window.location.href = '/profile';
                 } else {
                     console.log("something went wrong :(")
                     console.log(user.data);

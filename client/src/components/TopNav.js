@@ -26,7 +26,7 @@ export default class Navigation extends Component {
     }
 
     componentDidMount() {
-        API.scrape().then(user => {
+        API.isLoggedIn().then(user => {
             if (user.data.loggedIn) {
                 this.setState({
                     loggedIn: true

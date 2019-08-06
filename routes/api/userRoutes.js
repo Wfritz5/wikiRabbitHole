@@ -70,6 +70,13 @@ router.get("/unauthorized", function (req, res, next) {
         });
     }, 100);
 });
+router.get("/profile", authMiddleware.isLoggedIn, function (req, res, next) {
+    res.json({
+        user: req.user,
+        loggedIn: true
+    });
+});
+
 
 router.get("/logout", authMiddleware.logoutUser, function (req, res, next) {
     res.json("User logged out successfully");
