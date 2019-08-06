@@ -6,6 +6,10 @@ function Login(props) {
     return (
         <div className="login">
             <h2 className="loginTitle title-font">Login</h2>
+            <hr />
+            {props.message ? (
+                <Alert className="animated fadeIn" color="danger">{props.message}</Alert>
+            ) : (<></>)}
             <Form>
                 <FormGroup>
                     <Label for="username">Username</Label>

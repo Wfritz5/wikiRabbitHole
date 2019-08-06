@@ -14,6 +14,7 @@ class Signup extends Component {
         this.validatePassword();
         this.confirmPassword();
     }
+
     validateUsername() {
         if (this.props.username.length > 1 && !this.state.validUsername) {
             this.setState({
@@ -54,6 +55,7 @@ class Signup extends Component {
             });
         }
     }
+
     render() {
         return (
             <div>

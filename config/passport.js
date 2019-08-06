@@ -1,20 +1,31 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy();
+const LocalStrategy = require('passport-local').Strategy;
 const db = require('../models');
 
-passport.use(new LocalStrategy(function (username, password, done) {
-    db.User.findOne({
-        username: username
-    }, function (err, user) {
-        return err ? (console.log("something went wrong\n", err), done(err)) :
-            user ? user.validPassword(password, user.password) ? done(null, user) :
-            done(null, false, {
-                message: "invalid password"
-            }) : done(null, false, {
-                message: "User not found"
-            })
-    })
-}));
+passport.use(new LocalStrategy(
+    function (username, password, done) {
+        db.User.findOne({
+            username: username
+        }, function (err, user) {
+            if (err) {
+                console.log("something went wrong\n", err);
+                return done(err)
+            }
+            if (!user) {
+                return done(null, false, {
+                    message: "User not found"
+                });
+            }
+            if (!user.validPassword(password, user.password)) {
+                return done(null, false, {
+                    message: "invalid password"
+                });
+            } else {
+                return done(null, user)
+            }
+        });
+    }
+));
 
 passport.serializeUser(function (user, done) {
     done(null, user.id);

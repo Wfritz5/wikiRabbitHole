@@ -30,7 +30,7 @@ const raburlSeed = [{
     }
 ];
 const userSeed = [{
-    user: "Will",
+    username: "Will",
     password: "123",
 }];
 

@@ -21,23 +21,6 @@ const auth = {
             next();
         }
     },
-
-    // checks to see if the user is authenticated, then checks if they are an admin
-    // if yes, move on, otherwise send to unauthorized route
-    isAdmin: (req, res, next) => {
-        if (req.isAuthenticated()) {
-            console.log('user confirmed');
-            if (req.user.admin) {
-                console.log('Administer Confirmed');
-                next();
-            } else {
-                console.log('you must be an administer to continue');
-                res.redirect('/api/users/unauthorized')
-            }
-        } else {
-            res.redirect('/api/users/unauthorized')
-        }
-    }
 }
 
 module.exports = auth;

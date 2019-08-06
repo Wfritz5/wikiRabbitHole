@@ -1,6 +1,8 @@
-import React, { Component } from "react";
+import React, {
+    Component
+} from "react";
 import Login from "../../components/Login";
-import Signup from "../../components/Signup";
+import Signup from "../../components/Signup/Signup";
 import API from "../../utils/API";
 
 class Auth extends Component {
@@ -36,9 +38,8 @@ class Auth extends Component {
                         user: user.data.user
                     });
                     console.log("log in successful");
-                    window.location.href = '/profile';
-                }
-                else if (user.data.message) {
+                    // window.location.href = '/profile';
+                } else if (user.data.message) {
                     this.setState({
                         message: user.data.message
                     })
@@ -60,7 +61,7 @@ class Auth extends Component {
                         user: user.data.user
                     });
                     console.log("log in successful");
-                    window.location.href = '/profile';
+                    window.location.href = '/';
                 } else {
                     console.log("something went wrong :(")
                     console.log(user.data);
@@ -73,27 +74,25 @@ class Auth extends Component {
     }
 
     render() {
-        return (
-            <div className="authBox">
-                {(this.props.action === "login") ? (
-                    <Login
+        return (<div className="authBox" > {
+            (this.props.action === "login") ? (<Login
+                username={this.state.username}
+                password={this.state.password}
+                handleLogin={this.handleLogin}
+                handleInputChange={this.handleInputChange}
+                message={this.state.message}
+            />
+            ) : (
+                    <Signup
                         username={this.state.username}
                         password={this.state.password}
-                        handleLogin={this.handleLogin}
+                        confirmPassword={this.state.confirmPassword}
+                        handleSignup={this.handleSignup}
                         handleInputChange={this.handleInputChange}
                         message={this.state.message}
                     />
-                ) : (
-                        <Signup
-                            username={this.state.username}
-                            password={this.state.password}
-                            confirmPassword={this.state.confirmPassword}
-                            handleSignup={this.handleSignup}
-                            handleInputChange={this.handleInputChange}
-                            message={this.state.message}
-                        />
-                    )}
-            </div>
+                )}
+        </div>
         )
     }
 }
