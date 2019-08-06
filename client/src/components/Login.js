@@ -22,6 +22,15 @@ function Login(props) {
                         onChange={props.handleInputChange}
                     />
                 </FormGroup>
+                <FormGroup>
+                    <Label for="password">Password</Label>
+                    <Input type="password"
+                        name="password"
+                        id="password"
+                        placeholder="password"
+                        value={props.password}
+                        onChange={props.handleInputChange} />
+                </FormGroup>
                 <Button
                     id="loginButton"
                     onClick={props.handleLogin}
