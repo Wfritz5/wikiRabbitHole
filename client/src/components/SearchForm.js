@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from "./Button"
+import ScrapeButton from "./ScrapeButton"
 import styled from "styled-components";
 const axios = require("axios");
 const cheerio = require("cheerio");
@@ -44,31 +45,6 @@ class SearchForm extends Component {
         this.setState({ term: event.target.value})
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
-        const url = `https://en.wikipedia.org/wiki/${this.state.term}`
-        window.open(url)
-        this.setState({ term: ""})
-        axios.get(url).then(function (response) {
-            // Then, we load that into cheerio and save it to $ for a shorthand selector
-            const $ = cheerio.load(response.data);
-            console.log(response.data)
-            $(".mw-body").each(function (i, element) {
-              // Save an empty result object
-              const result = {};
-              // Add the href of every link, the title, a summary and save them as properties of the result object
-              result.title = $(this)
-              .children("h1#firstHeading").text();
-                result.image = $(this)
-                  .find(".image").attr("href");
-                // result.summary = $(this)
-                //   .find("p").text();
-                result.url = url;
-            console.log(response.data)
-            });
-          });
-    };
-
     handleClear = event => {
         event.preventDefault();
         this.setState({ term: ""})
@@ -89,12 +65,7 @@ class SearchForm extends Component {
                     onChange={this.handleInputChange}
                 />
                 {/* This button will submit the form */}
-                <Button 
-                  id={"submit-search"}
-                  label={"Submit"}
-                  onClick={this.handleSubmit}
-                  type={"submit"}
-                  style={blueButton}
+                <ScrapeButton term={this.state.term}
                 />
                 {/* This button will clear the search field */}
                   <Button 
