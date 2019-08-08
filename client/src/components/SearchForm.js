@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Button from "./Button"
 import ScrapeButton from "./ScrapeButton"
 import styled from "styled-components";
-const axios = require("axios");
-const cheerio = require("cheerio");
 
 const Input = styled.input`
 border-radius: 3px;
