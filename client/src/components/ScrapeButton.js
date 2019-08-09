@@ -30,26 +30,25 @@ class ScrapeButton extends Component {
         $(".mw-body").each(function (i, element) {
           result.title = $(this).children("h1#firstHeading").text();
           result.image = $(this).find(".image").attr("href");
-          // result.summary = $(this)
-          //   .find("p").text();
+          result.links = $(this).find("a").attr("href");
+          // result.summary = $(this).find("p").text();
           result.image = `https://commons.wikimedia.org${result.image}`
           result.url = url;
           axios.get(result.image).then(function (response) {
             const $ = cheerio.load(response.data);
             $(".fullImageLink").each(function (i, element) {
-              result.image = $(this)
-                .children("a").attr("href")
-                console.log(result.image)
+              result.image = $(this).children("a").attr("href")
+                console.log(result)
                 return result;
             });
           });
         });
       })
-      .then((result) => {
+      // .then((result) => {
         // console.log(result)
 
         // return (result)
-      });
+      // });
     }
   }
 
