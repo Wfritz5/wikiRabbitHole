@@ -23,41 +23,32 @@ class ScrapeButton extends Component {
       // this.setState({term: this.state.term})
       const url = `https://en.wikipedia.org/wiki/${this.props.term}`
       // window.open(url)
-      axios.get(url).then( (response) => {
-
-        // Save an empty result object
+      axios.get(url).then(response => {
         const result = {};
-
-        // Then, we load that into cheerio and save it to $ for a shorthand selector
         const $ = cheerio.load(response.data);
-        // console.log(response.data)
+
         $(".mw-body").each(function (i, element) {
-
-          // Add the href of every link, the title, a summary and save them as properties of the result object
-          result.title = $(this)
-            .children("h1#firstHeading").text();
-          result.image = $(this)
-            .find(".image").attr("href");
-
-          const fullImage = `https://commons.wikimedia.org${result.image}`
-          result.url = url;
-          console.log(fullImage)
-          return (fullImage);
-
+          result.title = $(this).children("h1#firstHeading").text();
+          result.image = $(this).find(".image").attr("href");
           // result.summary = $(this)
           //   .find("p").text();
-
-        });
-      }).then((result) => {
-        console.log(result)
-        axios.get(url).then(function (response) {
-          const $ = cheerio.load(response.data);
-          $(".fullImageLink").each(function (i, element) {
-            result.image = $(this)
-              .children("a").attr("href")
+          result.image = `https://commons.wikimedia.org${result.image}`
+          result.url = url;
+          axios.get(result.image).then(function (response) {
+            const $ = cheerio.load(response.data);
+            $(".fullImageLink").each(function (i, element) {
+              result.image = $(this)
+                .children("a").attr("href")
+                console.log(result.image)
+                return result;
+            });
           });
         });
-        return (result)
+      })
+      .then((result) => {
+        // console.log(result)
+
+        // return (result)
       });
     }
   }
