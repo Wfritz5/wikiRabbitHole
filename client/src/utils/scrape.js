@@ -1,3 +1,4 @@
+import noImage from "../assets/noImage.svg"
 const axios = require("axios");
 const cheerio = require("cheerio");
 
@@ -12,17 +13,23 @@ export default function scrape (url) {
         result.image = $(this).find(".image").attr("href");
         result.links = $(this).find("a").attr("href");
         // result.summary = $(this).find("p").text();
-        result.image = `https://commons.wikimedia.org${result.image}`
-      //   result.url = 
         result.url = `https://en.wikipedia.org/wiki/${result.title.replace(/ /g, "_")}`;
-        axios.get(result.image).then(function (response) {
-          const $ = cheerio.load(response.data);
-          $(".fullImageLink").each(function (i, element) {
-            result.image = $(this).children("a").attr("href")
-            console.log(result)
-            return result;
+        if (result.image){
+          result.image = `https://commons.wikimedia.org${result.image}`
+          axios.get(result.image).then(function (response) {
+            const $ = cheerio.load(response.data);
+            $(".fullImageLink").each(function (i, element) {
+              result.image = $(this).children("a").attr("href")
+              console.log(result)
+              return result;
+            });
           });
-        });
+        } else {
+          result.image = noImage;
+          console.log("Image not found")
+          console.log(result)
+          return result
+        }
       });
     })
     // .then((result) => {
