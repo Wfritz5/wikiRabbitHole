@@ -13,7 +13,6 @@ import API from "../utils/API";
 //     DropdownMenu,
 //     DropdownItem,
 // } from 'reactstrap';
-import SearchForm from "./SearchForm";
 import styled from "styled-components";
 import logo from "../logo.png";
 
@@ -103,8 +102,6 @@ export default class TopNav extends Component {
                     <a href="/"><LogoImg src={logo}></LogoImg></a>
                     <Project>rabbithole</Project>
                 </Brand>
-
-                <SearchForm></SearchForm>
 
             </Navigation>
             // <div>
