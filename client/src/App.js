@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.png";
 import "./App.css";
-import SearchForm from "./components/SearchForm"
-import Button from "./components/Button";
 import styled from "styled-components";
 
 
