@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import searchButton from "../assets/search.svg";
+import searchDetail from "../assets/search_detail.svg"
 import scrape from "../utils/scrape"
 
-const Search = styled.button `
+
+
+const SearchButton = props => {
+
+  const Search = styled.button `
   background: url('${searchButton}') no-repeat;
   background-size:cover;
   background-size:contain;
@@ -11,16 +16,22 @@ const Search = styled.button `
   min-width:40px;
   border:0;
   margin:2px 5% 0px 5%;
+  transition: background 0.2s;
+
+  &:hover{
+  background: url('${searchDetail}') no-repeat;
+  background-size:50%;
+  }
 `;
 
-const SearchButton = props => {
 
-  function handleSubmit (event) {
+
+  function handleSubmit(event) {
     event.preventDefault();
     const url = `https://en.wikipedia.org/wiki/${props.term}`
     scrape(url)
   }
-    return ( < Search id = {
+  return ( < Search id = {
       "submit-search"
     }
     label = {
