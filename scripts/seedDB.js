@@ -7,6 +7,15 @@ mongoose.connect(
         useNewUrlParser: true
     });
 
+
+const userSeed = [
+    {
+     username: "bob",
+    password: "1234Abcdef",
+    rabUrl: []
+    }   
+];
+
 const raburlSeed = [{
         title: "Dagobah rules!",
         summary: "Global warming run amok",
@@ -29,31 +38,63 @@ const raburlSeed = [{
         keyWords: ["Noctis", "Gladio", "Prompto", "Ignis"]
     }
 ];
-const userSeed = [{
-    username: "Will",
-    password: "123",
-}];
+var insertedIds = {};
+//var insertedCount = 0;
 
-db.RabUrl
+insertUser = function(idObj) {
+    db.User
     .deleteMany({})
-    .then(() => db.RabUrl.collection.insertMany(raburlSeed))
-    // .then(data => {console.log(data.result)})
-    .then(data => {
-        console.log(data.result.n + " url records insterted!")
+    .then(() => {userSeed[0].rabUrl.push(idObj[0]);
+        userSeed[0].rabUrl.push(idObj[1]);
+        userSeed[0].rabUrl.push(idObj[2]);
     })
-    .catch(err => {
-        console.error(err);
-        process.exit(1);
-    });
-
-db.User
-    .remove({})
     .then(() => db.User.collection.insertMany(userSeed))
-    .then(data => {
-        console.log(data.result.n + " records inserted!");
+    .then(userData => {
+        console.log(userData.result.n + " records inserted!");
+        console.log(userData);
         process.exit(0);
     })
     .catch(err => {
         console.error(err);
         process.exit(1);
     });
+}
+
+
+db.RabUrl
+        .deleteMany({})
+        .then(() => 
+            db.RabUrl.collection.insertMany(raburlSeed))
+        //.then(data => {console.log(data)})
+        .then(data => {
+                    //console.log(data);
+            //        console.log(data.result.n + " url records insterted!");
+                    insertedIds = data.insertedIds;
+                    //insertedCount = data.insertedCount;
+                    for (let idx = 0; idx < data.insertedCount; idx++){
+                        console.log(data.insertedIds[idx]);
+                    }
+                    //console.log(data.insertedIds);
+                    insertUser(data.insertedIds, data.insertedCount);
+                })
+            
+        .catch(err => {
+            console.error(err);
+            process.exit(1);
+        })
+
+
+//foo();
+//console.log(Object.values(insertedIds));
+// console.log (insertedIds[0]);
+// db.User
+//     .remove({})
+//     .then(() => db.User.collection.insertMany(userSeed))
+//     .then(data => {
+//         console.log(data.result.n + " records inserted!");
+//         process.exit(0);
+//     })
+//     .catch(err => {
+//         console.error(err);
+//         process.exit(1);
+//     });
