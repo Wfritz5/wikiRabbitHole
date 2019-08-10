@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import logo from "./logo.png";
 import "./App.css";
 import SearchForm from "./components/SearchForm"
 import Button from "./components/Button";
@@ -13,15 +13,6 @@ import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
 import NoMatch from "./pages/NoMatch";
 import TopNav from "./components/TopNav";
-
-const redButton = {
-  backgroundColor: "red",
-  padding: "5px",
-  margin: "5px",
-  borderRadius: "5px",
-  borderColor: "black",
-  color: "black"
-};
 
 const Container = styled.div`
 width:100vw;
@@ -51,16 +42,7 @@ class App extends Component {
             <Route exact path="/login" render={(props) => <Auth {...props} action="login" />} />
             <Route exact path="/profile" component={Profile} />
             <Route component={NoMatch} />
-            //*Button?
-            <div className="App">
-              <div className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h2>Wiki Rabbit Hole</h2>
-              </div>
-              {/* This button will pull random wikipedia articles */}
-            </div>
           </Switch>
-          <SearchForm />
         </Router>
       </Container>
     );

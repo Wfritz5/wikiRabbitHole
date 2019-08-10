@@ -21,14 +21,13 @@ border-radius: 15px;
 height:10px;
 background-color:#000000;
 color:white;
-width:25%;
+width:50%;
 box-shadow: 0 0 10px #666666;
 
 `;
 
 const Form = styled.form`
 display:flex;
-margin: 0.5em;
 border: none;
 border-radius: 3px;
 width:100%;
@@ -38,7 +37,7 @@ justify-content:center;
 
 const Clear = styled.button`
 background-color:#000000;
-color:white
+color:#DCDCDC;
 border: 1px solid white;
 border-radius:15px;
 height:18px;
@@ -49,10 +48,12 @@ margin:2px 0px 0px 10px;`;
 
 const Container = styled.div`
 width: 70%;
-align - content: center;
-justify - content: center;
+align-content: center;
+justify-content: center;
 display: flex;
-`
+align-self:flex-end;
+float:right;
+margin: 0em 1em 0 0`
 
 class SearchForm extends Component {
     state = {
