@@ -14,7 +14,7 @@ import API from "../utils/API";
 //     DropdownItem,
 // } from 'reactstrap';
 import styled from "styled-components";
-import logo from "../logo.png";
+import logo from "../assets/logo.png";
 
 
 const Navigation = styled.nav`

@@ -1,10 +1,12 @@
-import React, { Component } from "react";
+import React, {
+  Component
+} from "react";
 import styled from "styled-components";
-import randButton from "../random.png";
+import randButton from "../assets/random.svg";
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-const Random = styled.button`
+const Random = styled.button `
 background: url('${randButton}') no-repeat;
 background-size:contain;
 min-height:40px;
@@ -30,7 +32,7 @@ class RandomButton extends Component {
           result.links = $(this).find("a").attr("href");
           // result.summary = $(this).find("p").text();
           result.image = `https://commons.wikimedia.org${result.image}`
-        //   result.url = 
+          //   result.url = 
           result.url = `https://en.wikipedia.org/wiki/${result.title.replace(/ /g, "_")}`;
           axios.get(result.image).then(function (response) {
             const $ = cheerio.load(response.data);
@@ -51,10 +53,19 @@ class RandomButton extends Component {
   }
 
   render() {
-    return (<Random id={"random-search"}
-      label={"Random"}
-      onClick={this.handleSubmit}
-      type={"submit"} />
+    return ( < Random id = {
+        "random-search"
+      }
+      label = {
+        "Random"
+      }
+      onClick = {
+        this.handleSubmit
+      }
+      type = {
+        "submit"
+      }
+      />
     )
   };
 }
