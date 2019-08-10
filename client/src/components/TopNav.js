@@ -45,7 +45,7 @@ const Auth = styled.nav`
 margin:0.5em;
 float:right;
 text-align:right;
-width:50%
+width:40%
 `;
 
 const Brand = styled.div`

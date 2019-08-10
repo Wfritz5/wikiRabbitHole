@@ -18,19 +18,20 @@ const Input = styled.input`
 border: 1px solid white;
 padding:5px 10px;
 border-radius: 15px;
-height:10px;
+height:13px;
 background-color:#000000;
 color:white;
 width:50%;
 box-shadow: 0 0 10px #666666;
-
+margin:0px 20px 0px 20px;
 `;
 
 const Form = styled.form`
 display:flex;
 border: none;
 border-radius: 3px;
-width:100%;
+float:right;
+width:70%;
 align-content:center;
 justify-content:center;
 `
@@ -39,20 +40,19 @@ const Clear = styled.button`
 background-color:#000000;
 color:#DCDCDC;
 border: 1px solid white;
-border-radius:15px;
-height:18px;
+border-radius:25px;
+height:25px;
 box-shadow: 0 0 10px #666666;
-font-size:10px;
-margin:2px 0px 0px 10px;`;
+font-size:0.8em;
+margin:0px 20px 50px 20px;`;
 
 
 const Container = styled.div`
-width: 70%;
+width: 100%;
 align-content: center;
 justify-content: center;
 display: flex;
 align-self:flex-end;
-float:right;
 margin: 0em 1em 0 0`
 
 class SearchForm extends Component {
@@ -79,11 +79,9 @@ class SearchForm extends Component {
             <Container >
                 <Form id="wiki-form" onSubmit={event => event.preventDefault()} >
                     {/* <label htmlFor="wikiSearch"> Wikipedia Search </label> */}
-                    <Random
-                        id={"random-search"}
-                        label={"Random"}
-                        onClick={this.handleSubmit}
-                        type={"submit"} />
+                    <Clear id={"clear-search"} label={"Clear"} onClick={() => this.setState({ term: "" })} type={"reset"}> clear </Clear>
+
+
                     <Input type="text"
                         name="wikiSearch"
                         id="wikiSearch"
@@ -95,10 +93,14 @@ class SearchForm extends Component {
                     {
                         /* This button will clear the search field */
                     }
-                    <Clear id={"clear-search"} label={"Clear"} onClick={() => this.setState({ term: "" })} type={"reset"}>clear</Clear>
+                    <Random
+                        id={"random-search"}
+                        label={"Random"}
+                        onClick={this.handleSubmit}
+                        type={"submit"} />
                     <ScrapeButton term={this.state.term} />
                 </Form >
-            </Container>
+            </Container >
         );
     }
 }

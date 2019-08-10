@@ -12,7 +12,7 @@ const Search = styled.button`
   height:40px;
   width:40px;
   border:0;
-  margin:2px 10px 0px 10px;
+  margin:2px 20px 0px 20px;
 `;
 
 class ScrapeButton extends Component {
