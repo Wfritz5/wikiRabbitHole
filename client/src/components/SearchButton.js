@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from "react";
+import React from "react";
 import styled from "styled-components";
 import searchButton from "../assets/search.svg";
 import scrape from "../utils/scrape"
@@ -15,19 +13,13 @@ const Search = styled.button `
   margin:2px 5% 0px 5%;
 `;
 
-class SearchButton extends Component {
-  constructor(props) {
-    super(props);
+const SearchButton = props => {
 
-  }
-  handleSubmit = event => {
+  function handleSubmit (event) {
     event.preventDefault();
-    const url = `https://en.wikipedia.org/wiki/${this.props.term}`
+    const url = `https://en.wikipedia.org/wiki/${props.term}`
     scrape(url)
   }
-
-
-  render() {
     return ( < Search id = {
       "submit-search"
     }
@@ -35,14 +27,13 @@ class SearchButton extends Component {
       "Submit"
     }
     onClick = {
-      this.handleSubmit
+      handleSubmit
     }
     type = {
       "submit"
     }
     />
   )
-  };
 }
 
 export default SearchButton;

@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from "react";
+import React from "react";
 import styled from "styled-components";
 import randButton from "../assets/random.svg";
 import scrape from "../utils/scrape"
@@ -13,19 +11,13 @@ min-width:40px;
 border:0;
 margin:2px 0px 0px 0px;`;
 
-class RandomButton extends Component {
-  constructor(props) {
-    super(props);
+const RandomButton = () => {
 
-  }
-  handleSubmit = event => {
+  function handleSubmit (event) {
     event.preventDefault();
     const url = `https://en.wikipedia.org/wiki/Special:Random`
     scrape(url)
   }
-
-
-  render() {
     return ( < Random id = {
         "random-search"
       }
@@ -33,14 +25,12 @@ class RandomButton extends Component {
         "Random"
       }
       onClick = {
-        this.handleSubmit
+        handleSubmit
       }
       type = {
         "submit"
       }
       />
     )
-  };
 }
-
 export default RandomButton;
