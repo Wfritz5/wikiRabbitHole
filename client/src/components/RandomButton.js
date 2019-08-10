@@ -1,40 +1,37 @@
 import React, { Component } from "react";
-import Button from "./Button";
 import styled from "styled-components";
-import searchButton from "../search.png";
+import randButton from "../random.png";
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-const Search = styled.button`
-  background: url('${searchButton}') no-repeat;
-  background-size:cover;
-  background-size:contain;
-  min-height:40px;
-  min-width:40px;
-  border:0;
-  margin:2px 5% 0px 5%;
-`;
+const Random = styled.button`
+background: url('${randButton}') no-repeat;
+background-size:contain;
+min-height:40px;
+min-width:40px;
+border:0;
+margin:2px 0px 0px 0px;`;
 
-class ScrapeButton extends Component {
+class RandomButton extends Component {
   constructor(props) {
     super(props);
 
     this.handleSubmit = event => {
       event.preventDefault();
       // this.setState({term: this.state.term})
-      const url = `https://en.wikipedia.org/wiki/${this.props.term}`
+      const url = `https://en.wikipedia.org/wiki/Special:Random`
       // window.open(url)
       axios.get(url).then(response => {
         const result = {};
         const $ = cheerio.load(response.data);
-
         $(".mw-body").each(function (i, element) {
           result.title = $(this).children("h1#firstHeading").text();
           result.image = $(this).find(".image").attr("href");
           result.links = $(this).find("a").attr("href");
           // result.summary = $(this).find("p").text();
           result.image = `https://commons.wikimedia.org${result.image}`
-          result.url = url;
+        //   result.url = 
+          result.url = `https://en.wikipedia.org/wiki/${result.title.replace(/ /g, "_")}`;
           axios.get(result.image).then(function (response) {
             const $ = cheerio.load(response.data);
             $(".fullImageLink").each(function (i, element) {
@@ -54,12 +51,12 @@ class ScrapeButton extends Component {
   }
 
   render() {
-    return (<Search id={"submit-search"}
-      label={"Submit"}
+    return (<Random id={"random-search"}
+      label={"Random"}
       onClick={this.handleSubmit}
       type={"submit"} />
     )
   };
 }
 
-export default ScrapeButton;
+export default RandomButton;

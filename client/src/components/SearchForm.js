@@ -1,18 +1,9 @@
 import React, {
     Component
 } from 'react';
-import Button from "./Button"
-import ScrapeButton from "./ScrapeButton"
+import RandomButton from "./RandomButton"
+import SearchButton from "./SearchButton"
 import styled from "styled-components";
-import randButton from "../random.png";
-
-const Random = styled.button`
-background: url('${randButton}') no-repeat;
-background-size:contain;
-min-height:40px;
-min-width:40px;
-border:0;
-margin:2px 0px 0px 0px;`;
 
 const Input = styled.input`
 border: 1px solid white;
@@ -82,7 +73,6 @@ class SearchForm extends Component {
                     {/* <label htmlFor="wikiSearch"> Wikipedia Search </label> */}
                     <Clear id={"clear-search"} label={"Clear"} onClick={() => this.setState({ term: "" })} type={"reset"}> clear </Clear>
 
-
                     <Input type="text"
                         name="wikiSearch"
                         id="wikiSearch"
@@ -94,12 +84,15 @@ class SearchForm extends Component {
                     {
                         /* This button will clear the search field */
                     }
-                    <Random
+                    <RandomButton
                         id={"random-search"}
                         label={"Random"}
                         onClick={this.handleSubmit}
-                        type={"submit"} />
-                    <ScrapeButton term={this.state.term} />
+                        type={"submit"} 
+                        />
+                    <SearchButton 
+                    term={this.state.term}
+                    />
                 </Form >
             </Container >
         );
