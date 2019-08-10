@@ -3,8 +3,7 @@ import React, {
 } from "react";
 import styled from "styled-components";
 import searchButton from "../assets/search.svg";
-const axios = require("axios");
-const cheerio = require("cheerio");
+import scrape from "../utils/scrape"
 
 const Search = styled.button `
   background: url('${searchButton}') no-repeat;
@@ -20,55 +19,29 @@ class SearchButton extends Component {
   constructor(props) {
     super(props);
 
-    this.handleSubmit = event => {
-      event.preventDefault();
-      // this.setState({term: this.state.term})
-      const url = `https://en.wikipedia.org/wiki/${this.props.term}`
-      // window.open(url)
-      axios.get(url).then(response => {
-        const result = {};
-        const $ = cheerio.load(response.data);
-
-        $(".mw-body").each(function (i, element) {
-          result.title = $(this).children("h1#firstHeading").text();
-          result.image = $(this).find(".image").attr("href");
-          result.links = $(this).find("a").attr("href");
-          // result.summary = $(this).find("p").text();
-          result.image = `https://commons.wikimedia.org${result.image}`
-          result.url = url;
-          axios.get(result.image).then(function (response) {
-            const $ = cheerio.load(response.data);
-            $(".fullImageLink").each(function (i, element) {
-              result.image = $(this).children("a").attr("href")
-              console.log(result)
-              return result;
-            });
-          });
-        });
-      })
-      // .then((result) => {
-      // console.log(result)
-
-      // return (result)
-      // });
-    }
   }
+  handleSubmit = event => {
+    event.preventDefault();
+    const url = `https://en.wikipedia.org/wiki/${this.props.term}`
+    scrape(url)
+  }
+
 
   render() {
     return ( < Search id = {
-        "submit-search"
-      }
-      label = {
-        "Submit"
-      }
-      onClick = {
-        this.handleSubmit
-      }
-      type = {
-        "submit"
-      }
-      />
-    )
+      "submit-search"
+    }
+    label = {
+      "Submit"
+    }
+    onClick = {
+      this.handleSubmit
+    }
+    type = {
+      "submit"
+    }
+    />
+  )
   };
 }
 
