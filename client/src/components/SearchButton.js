@@ -1,10 +1,12 @@
-import React, { Component } from "react";
+import React, {
+  Component
+} from "react";
 import styled from "styled-components";
-import searchButton from "../search.png";
+import searchButton from "../assets/search.svg";
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-const Search = styled.button`
+const Search = styled.button `
   background: url('${searchButton}') no-repeat;
   background-size:cover;
   background-size:contain;
@@ -53,10 +55,19 @@ class SearchButton extends Component {
   }
 
   render() {
-    return (<Search id={"submit-search"}
-      label={"Submit"}
-      onClick={this.handleSubmit}
-      type={"submit"} />
+    return ( < Search id = {
+        "submit-search"
+      }
+      label = {
+        "Submit"
+      }
+      onClick = {
+        this.handleSubmit
+      }
+      type = {
+        "submit"
+      }
+      />
     )
   };
 }
