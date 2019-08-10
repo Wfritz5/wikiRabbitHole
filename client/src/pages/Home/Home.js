@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
 import API from "../../utils/API";
+import SearchForm from "../../components/SearchForm.js";
 
 class Home extends Component {
 
@@ -33,6 +34,7 @@ class Home extends Component {
                 {this.state.loggedIn ? (
                     <Button color="warning" block>View Saved Articles</Button>
                 ) : (<></>)}
+                <SearchForm></SearchForm>
             </div>
         );
     }

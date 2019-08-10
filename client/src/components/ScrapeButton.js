@@ -1,18 +1,19 @@
-import React, {
-  Component
-} from "react";
-import Button from "./Button"
+import React, { Component } from "react";
+import Button from "./Button";
+import styled from "styled-components";
+import searchButton from "../search.png";
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-const blueButton = {
-  backgroundColor: "blue",
-  padding: "5px",
-  margin: "5px",
-  borderRadius: "5px",
-  borderColor: "black",
-  color: "white"
-};
+const Search = styled.button`
+  background: url('${searchButton}') no-repeat;
+  background-size:cover;
+  background-size:contain;
+  min-height:40px;
+  min-width:40px;
+  border:0;
+  margin:2px 5% 0px 5%;
+`;
 
 class ScrapeButton extends Component {
   constructor(props) {
@@ -38,38 +39,25 @@ class ScrapeButton extends Component {
             const $ = cheerio.load(response.data);
             $(".fullImageLink").each(function (i, element) {
               result.image = $(this).children("a").attr("href")
-                console.log(result)
-                return result;
+              console.log(result)
+              return result;
             });
           });
         });
       })
       // .then((result) => {
-        // console.log(result)
+      // console.log(result)
 
-        // return (result)
+      // return (result)
       // });
     }
   }
 
   render() {
-    return ( <
-      Button id = {
-        "submit-search"
-      }
-      label = {
-        "Submit"
-      }
-      onClick = {
-        this.handleSubmit
-      }
-      type = {
-        "submit"
-      }
-      style = {
-        blueButton
-      }
-      />
+    return (<Search id={"submit-search"}
+      label={"Submit"}
+      onClick={this.handleSubmit}
+      type={"submit"} />
     )
   };
 }
