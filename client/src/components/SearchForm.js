@@ -15,10 +15,15 @@ border:0;
 margin:2px 10px 0px 10px;`;
 
 const Input = styled.input`
-border: 1px solid black;
-padding:5px;
+border: 1px solid white;
+padding:5px 10px;
 border-radius: 15px;
 height:10px;
+background-color:#000000;
+color:white;
+width:25%;
+box-shadow: 0 0 10px #666666;
+
 `;
 
 const Form = styled.form`
@@ -26,20 +31,27 @@ display:flex;
 margin: 0.5em;
 border: none;
 border-radius: 3px;
-`
-
-const Clear = styled.button`
-background-color:#FFFFFF;
-border: 1px solid black;
-border-radius:15px;
-height:24px;
-`;
-
-const Container = styled.div`
 width:100%;
 align-content:center;
 justify-content:center;
-display:flex;
+`
+
+const Clear = styled.button`
+background-color:#000000;
+color:white
+border: 1px solid white;
+border-radius:15px;
+height:18px;
+box-shadow: 0 0 10px #666666;
+font-size:10px;
+margin:2px 0px 0px 10px;`;
+
+
+const Container = styled.div`
+width: 70%;
+align - content: center;
+justify - content: center;
+display: flex;
 `
 
 class SearchForm extends Component {
@@ -74,16 +86,16 @@ class SearchForm extends Component {
                     <Input type="text"
                         name="wikiSearch"
                         id="wikiSearch"
-                        placeholder="Search for an article"
+                        placeholder=". . ."
                         value={this.state.term} onChange={this.handleInputChange} />
                     {
                         /* This button will submit the form */
                     }
-                    <ScrapeButton term={this.state.term} />
                     {
                         /* This button will clear the search field */
                     }
                     <Clear id={"clear-search"} label={"Clear"} onClick={() => this.setState({ term: "" })} type={"reset"}>clear</Clear>
+                    <ScrapeButton term={this.state.term} />
                 </Form >
             </Container>
         );
