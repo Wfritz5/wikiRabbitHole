@@ -9,10 +9,10 @@ const Search = styled.button`
   background: url('${searchButton}') no-repeat;
   background-size:cover;
   background-size:contain;
-  height:40px;
-  width:40px;
+  min-height:40px;
+  min-width:40px;
   border:0;
-  margin:2px 20px 0px 20px;
+  margin:2px 5% 0px 5%;
 `;
 
 class ScrapeButton extends Component {

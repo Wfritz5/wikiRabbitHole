@@ -9,21 +9,22 @@ import randButton from "../random.png";
 const Random = styled.button`
 background: url('${randButton}') no-repeat;
 background-size:contain;
-height:40px;
-width:40px;
+min-height:40px;
+min-width:40px;
 border:0;
-margin:2px 10px 0px 10px;`;
+margin:2px 0px 0px 0px;`;
 
 const Input = styled.input`
 border: 1px solid white;
 padding:5px 10px;
 border-radius: 15px;
 height:13px;
+min-width:130px;
 background-color:#000000;
 color:white;
 width:50%;
 box-shadow: 0 0 10px #666666;
-margin:0px 20px 0px 20px;
+margin:0px 5% 0px 5%;
 `;
 
 const Form = styled.form`
@@ -44,7 +45,7 @@ border-radius:25px;
 height:25px;
 box-shadow: 0 0 10px #666666;
 font-size:0.8em;
-margin:0px 20px 50px 20px;`;
+margin:0px 0px 2px 5%;`;
 
 
 const Container = styled.div`
