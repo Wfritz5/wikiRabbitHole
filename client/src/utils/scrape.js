@@ -7,12 +7,20 @@ export default function scrape (url) {
     // window.open(url)
     axios.get(url).then(response => {
       const result = {};
+      const linkArr = [];
       const $ = cheerio.load(response.data);
       $(".mw-body").each(function (i, element) {
         result.title = $(this).children("h1#firstHeading").text();
-        result.image = $(this).find(".image").attr("href");
-        result.links = $(this).find("a").attr("href");
+        // const title = result.title;
+        // if (title.search("disambiguation")) {
         // result.summary = $(this).find("p").text();
+        result.image = $(this).find(".image").attr("href");
+        result.links = $(this).find("a");
+        $(result.links).each(function(i, link){
+          linkArr.push($(link).attr('href'))
+        });
+        linkArr.splice(0, 3)
+        console.log(linkArr)
         result.url = `https://en.wikipedia.org/wiki/${result.title.replace(/ /g, "_")}`;
         if (result.image){
           result.image = `https://commons.wikimedia.org${result.image}`
@@ -30,6 +38,9 @@ export default function scrape (url) {
           console.log(result)
           return result
         }
+        // } else {
+        //     console.log("Disambiguation")
+        // }
       });
     })
     // .then((result) => {
