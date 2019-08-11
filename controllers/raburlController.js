@@ -12,6 +12,11 @@ module.exports = {
     create: function (req, res) {
         db.RabUrl
             .create(req.body)
+            .then(console.log(dbModel))
+            .then(db.Users.update(
+                { _id: req.params.userId },
+                { $push: { rabUrl: dbModel._id } }
+              ))
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
