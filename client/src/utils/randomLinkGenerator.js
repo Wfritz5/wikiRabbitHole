@@ -1,0 +1,11 @@
+export default function randomLinkGenerator(links, num) {
+    const arr = []
+    while (arr.length < num) {
+      const r = Math.floor(Math.random() * links.length);
+      if (arr.indexOf(r) === -1) {
+      const randLink = `wikipedia.org${links[r]}`
+      arr.push(randLink);
+      }
+    }
+    return arr;
+  }
