@@ -37,7 +37,7 @@ export default function scrape(url) {
         });
       } else {
         result.image = noImage;
-        console.log("Image not found")
+        console.log(`Image not found ${result}`)
         return result
       }
     });
