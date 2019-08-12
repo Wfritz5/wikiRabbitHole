@@ -1,4 +1,5 @@
 import noImage from "../assets/noImage.svg"
+import randomLinkGenerator from "./randomLinkGenerator"
 const axios = require("axios");
 const cheerio = require("cheerio");
 
@@ -8,20 +9,7 @@ export default function scrape(url) {
     const linkArr = [];
     const $ = cheerio.load(response.data);
     $(".mw-body").each(function (i, element) {
-      function randomLinkGenerator(links) {
-        const arr = []
-        while (arr.length < 5) {
-          const r = Math.floor(Math.random() * links.length);
-          if (arr.indexOf(r) === -1) {
-          const randLink = `wikipedia.org${links[r]}`
-          arr.push(randLink);
-          }
-        }
-        return arr;
-      }
       result.title = $(this).children("h1#firstHeading").text();
-      // const title = result.title;
-      // if (title.search("disambiguation")) {
       // result.summary = $(this).find("p").text();
       result.image = $(this).find(".image").attr("href");
       result.links = $(this).find("a");
@@ -33,7 +21,8 @@ export default function scrape(url) {
       // filter the links to grab good urls
       result.filteredLinks = linkArr.filter(link => link.includes(`/wiki/`) && !link.includes(`:`) &&
         !link.includes(`%`))
-      result.randomLinks = randomLinkGenerator(result.filteredLinks);
+      // grabs specified number of unique random numbers
+      result.randomLinks = randomLinkGenerator(result.filteredLinks, 5);
       // checks for a good image and then will grab its base code
       if (result.image) {
         // need to check for `https://en.wikimedia.org${result.image}` as well
@@ -49,17 +38,8 @@ export default function scrape(url) {
       } else {
         result.image = noImage;
         console.log("Image not found")
-        console.log(result)
         return result
       }
-      // } else {
-      //     console.log("Disambiguation")
-      // }
     });
   })
-  // .then((result) => {
-  // console.log(result)
-
-  // return (result)
-  // });
 }
