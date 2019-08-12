@@ -1,20 +1,43 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Label = styled.label`
 color:white;
+margin:0.5em;
 `;
 const FormGroup = styled.fieldset`
 border:none;
+`;
+
+const SignUp = styled.a`
+color:white;
+text-decoration:none;
 margin:0.5em;
+`;
+
+const Title = styled.h2`
+color:white;
+`;
+
+const Submit = styled.button`
+background-color:#000000;
+color:#DCDCDC;
+border: 1px solid white;
+border-radius:25px;
+height:25px;
+box-shadow: 0 0 10px #666666;
+font-size:0.8em;
+margin:0px 0px 2px 5%;`;
+
+const Container = styled.div`
+display:relative;
+margin:5em;
 `;
 
 function Login(props) {
     return (
-        <div className="login">
-            <h2 className="loginTitle title-font">Login</h2>
-            <hr />
+        <Container className="login">
+            <Title className="loginTitle title-font">Login</Title>
             {props.message ? (
                 <alert className="animated fadeIn" color="danger">{props.message}</alert>
             ) : (<></>)}
@@ -39,16 +62,16 @@ function Login(props) {
                         value={props.password}
                         onChange={props.handleInputChange} />
                 </FormGroup>
-                <button
+                <Submit
                     id="loginButton"
-                    onClick={props.handleLogin}
-                    block>Login
-                </button>
+                    onClick={props.handleLogin}>
+                    Login
+                </Submit>
                 <p className="signupLink">
-                    <Link to="/signup">No account? Sign up here</Link>
+                    <SignUp href="/signup">No account? Sign up here</SignUp>
                 </p>
             </form>
-        </div>
+        </Container>
     );
 }
 
