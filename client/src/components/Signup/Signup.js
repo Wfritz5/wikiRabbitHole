@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
+import { Input } from "reactstrap"
 
 const Label = styled.label`
 color:white;
@@ -7,6 +8,8 @@ margin:0.5em;
 `;
 const FormGroup = styled.fieldset`
 border:none;
+`;
+const Form = styled.form`
 `;
 
 const LogIn = styled.a`
@@ -35,9 +38,22 @@ font-size:0.8em;
 margin:0px 0px 2px 5%;`;
 
 const Container = styled.div`
-display:relative;
+display:flex;
+justify-content:center;
+width:100%;
 margin:5em;
 `;
+
+const Rule = styled.hr`
+margin:1em;
+`;
+
+const InputStyleL = {
+    marginLeft: 1 + "em"
+}
+const InputStyleR = {
+    marginLeft: -0.2 + "em"
+}
 
 class Signup extends Component {
     state = {
@@ -97,21 +113,22 @@ class Signup extends Component {
         return (
             <Container>
                 <Title className="loginTitle title-font">Signup</Title>
+                <Rule></Rule>
                 {this.props.message ? (
                     <alert className="animated fadeIn" color="danger">{this.props.message}</alert>
                 ) : (<></>)}
-                <form>
+                <Form>
                     <FormGroup>
                         <Label htmlFor="username">Username</Label>
-                        <input type="text" name="username" id="username" placeholder="username" value={this.props.username} onChange={this.props.handleInputChange} valid={this.state.validUsername} />
+                        <Input style={InputStyleR} type="text" name="username" id="username" placeholder="username" value={this.props.username} onChange={this.props.handleInputChange} valid={this.state.validUsername} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="password">Password</Label>
+                        <Label htmlFor="password">Password</Label>
                         <input type="password" name="password" id="password" placeholder="password" value={this.props.password} onChange={this.props.handleInputChange} valid={this.state.validPassword} />
                     </FormGroup>
                     <FormGroup>
-                        <Label htmlFor="confirmPassword">Confirm Password</Label>
-                        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm password" value={this.props.confirmPassword} onChange={this.props.handleInputChange} valid={this.state.confirmPassword} />
+                        <Label htmlFor="confirmPassword">Confirm</Label>
+                        <Input style={InputStyleL} type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm password" value={this.props.confirmPassword} onChange={this.props.handleInputChange} valid={this.state.confirmPassword} />
                         <P><small>( at least 8 characters, 1 capital & 1 number )</small></P>
                     </FormGroup>
                     {/* if all fields are valid, allow the user to submit the form */}
@@ -123,7 +140,7 @@ class Signup extends Component {
                     <P className="signupLink">
                         <LogIn to="/login">already signed up?  Login here</LogIn>
                     </P>
-                </form>
+                </Form>
             </Container>
         );
     }
