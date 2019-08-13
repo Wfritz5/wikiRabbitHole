@@ -9,22 +9,62 @@ class Canvas extends Component {
         this.initializeCamera = this.initializeCamera.bind(this);
         // this.initializeOrbits = this.initializeOrbits.bind(this);
     }
-    componentDidMount() {
+    componentDidUpdate() {
         const width = this.mount.clientWidth;
         const height = this.mount.clientHeight;
+        const points = this.props.state.links;
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.camera = new THREE.PerspectiveCamera(100, width / height, 0.001, 10000);
+        this.camera.position.set(0, 0, 200)
+        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        this.renderer.setClearColor(0xffffff, 0);
+
         // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.renderer.setSize(width, height);
         this.mount.appendChild(this.renderer.domElement);
         // this.initializeOrbits();
         this.initializeCamera();
 
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshBasicMaterial({ color: 0xFF00FF });
-        const cube = new THREE.Mesh(geometry, material);
-        this.scene.add(cube);
+        var banners = new THREE.Group();
+        for (var i = 0; i < points.length; i++) {
+            var starGeometry = new THREE.Geometry();
+            var canvas = document.createElement("canvas");
+            var size = 1024;
+            canvas.width = size;
+            canvas.height = size;
+            var context1 = canvas.getContext("2d");
+            context1.fillStyle = "#FFFFFF";
+            context1.textAlign = "left";
+            context1.font = "normal 24px Tahoma, Geneva, sans-serif";
+            context1.fillText(points[i], size / 2, size / 3);
+            var texture1 = new THREE.Texture(canvas);
+            texture1.needsUpdate = true;
+            var star = new THREE.Vector3();
+            star.x = THREE.Math.randFloatSpread(3);
+            star.y = THREE.Math.randFloatSpread(5);
+            star.z = THREE.Math.randFloatSpread(1);
+            starGeometry.vertices.push(star);
+            var textMaterial = new THREE.PointsMaterial({
+                size: 10,
+                map: texture1,
+                depthTest: false,
+                transparent: true
+            });
+
+            var banner = new THREE.Points(starGeometry, textMaterial);
+
+            switch (i) {
+                case i:
+                    banner.name = points[i];
+                    break;
+            }
+
+            banners.add(banner);
+        }
+
+        this.scene.add(banners);
+        banners.position.set(0, -2.5, 0)
+        console.log(this.scene)
         this.animate();
     }
     componentWillUnmount() {
@@ -44,6 +84,10 @@ class Canvas extends Component {
     animate() {
         this.frameId = window.requestAnimationFrame(this.animate);
         this.renderer.render(this.scene, this.camera);
+        for (var i in this.scene.children.children) {
+            this.scene.children[0].children[i].rotation.x += Math.random();
+        }
+
     }
     addCube(cube) {
         this.scene.add(cube);
@@ -53,7 +97,7 @@ class Canvas extends Component {
             <div>
                 <div
                     id="boardCanvas"
-                    style={{ width: "80vw", height: "40vw" }}
+                    style={{ bottom: 0, position: "absolute", width: "100vw", height: "100vh", zIndex: 0 }}
                     ref={mount => {
                         this.mount = mount;
                     }}

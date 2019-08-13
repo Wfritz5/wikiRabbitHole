@@ -59,7 +59,7 @@ class Home extends Component {
                     <Button color="warning" block>View Saved Articles</Button>
                 ) : (<></>)}
                 <SearchForm scrape={(url) => this.scrapeResource(url)} />
-                <Canvas scrape={(url) => this.scrapeResource(url)} />
+                <Canvas state={this.state} scrape={(url) => this.scrapeResource(url)} />
             </div >
         );
     }
