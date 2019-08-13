@@ -41,8 +41,8 @@ class Home extends Component {
                 {this.state.loggedIn ? (
                     <Button color="warning" block>View Saved Articles</Button>
                 ) : (<></>)}
-                <SearchForm scrape={() => { this.scrapeResource() }}></SearchForm>
-            </div>
+                <SearchForm scrape={(url) => this.scrapeResource(url)} />
+            </div >
         );
     }
 }

@@ -103,13 +103,13 @@ class SearchForm extends Component {
     search = (event, url) => {
         event.preventDefault();
         console.log("search")
-        this.props.scrape(url);
+        this.props.scrape("https://en.wikipedia.org/wiki/" + url);
     }
 
-    random = (event, url) => {
+    random = (event) => {
         event.preventDefault();
         console.log("clicked")
-        this.props.scrape(url);
+        this.props.scrape("https://en.wikipedia.org/wiki/Special:Random");
     }
 
     render() {
@@ -133,7 +133,7 @@ class SearchForm extends Component {
                     <Random
                         id={"random-search"}
                         label={"Random"}
-                        onClick={(e) => { this.random(e, this.state.term) }}
+                        onClick={(e) => { this.random(e) }}
                         type={"submit"}
                     />
                     <Search
