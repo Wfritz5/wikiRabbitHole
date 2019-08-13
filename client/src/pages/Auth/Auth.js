@@ -4,6 +4,12 @@ import React, {
 import Login from "../../components/Login";
 import Signup from "../../components/Signup";
 import API from "../../utils/API";
+import styled from "styled-components";
+
+const Container = styled.div`
+display:flex;
+justify-content:center;
+`;
 
 class Auth extends Component {
 
@@ -74,7 +80,7 @@ class Auth extends Component {
     }
 
     render() {
-        return (<div className="authBox" > {
+        return (<Container className="authBox" > {
             (this.props.action === "login") ? (<Login
                 username={this.state.username}
                 password={this.state.password}
@@ -92,7 +98,7 @@ class Auth extends Component {
                         message={this.state.message}
                     />
                 )}
-        </div>
+        </Container>
         )
     }
 }
