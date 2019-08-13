@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import randButton from "../assets/random.svg";
 import randDetail from "../assets/random_detail.svg";
-import scrape from "../utils/scrape"
 
-const Random = styled.button `
+
+const Random = styled.button`
 background: url('${randButton}') no-repeat;
 background-size:contain;
 min-height:40px;
@@ -21,24 +21,18 @@ transition: background 0.2s;
 
 const RandomButton = () => {
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const url = `https://en.wikipedia.org/wiki/Special:Random`
-    scrape(url)
+
+  return (<Random id={
+    "random-search"
   }
-  return ( < Random id = {
-      "random-search"
-    }
-    label = {
+    label={
       "Random"
     }
-    onClick = {
-      handleSubmit
-    }
-    type = {
+
+    type={
       "submit"
     }
-    />
+  />
   )
 }
 export default RandomButton;

@@ -2,17 +2,41 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
+import Canvas from "../../components/three/canvas.js";
+import scrape from "../../utils/scrape"
+
 
 class Home extends Component {
 
+
     state = {
         loggedIn: false,
+        href: "",
+        links: [],
+        image: "",
+        article: "",
+        title: ""
     };
 
     componentDidMount() {
         // this.viewSavedArticles();
         this.loggedIn();
     }
+
+    scrapeResource = (url) => {
+        scrape(url, (result) => {
+            this.setState({
+                href: result.url,
+                links: result.randomLinks,
+                image: result.image,
+                article: "",
+                title: result.title
+            })
+            console.log(this.state);
+        });
+    }
+
+
 
     // viewSavedArticles = () => {}
 
@@ -34,8 +58,9 @@ class Home extends Component {
                 {this.state.loggedIn ? (
                     <Button color="warning" block>View Saved Articles</Button>
                 ) : (<></>)}
-                <SearchForm></SearchForm>
-            </div>
+                <SearchForm scrape={(url) => this.scrapeResource(url)} />
+                <Canvas state={this.state} scrape={(url) => this.scrapeResource(url)} />
+            </div >
         );
     }
 }
