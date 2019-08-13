@@ -125,7 +125,7 @@ class Signup extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="password">Password</Label>
-                        <input type="password" name="password" id="password" placeholder="password" value={this.props.password} onChange={this.props.handleInputChange} valid={this.state.validPassword} />
+                        <Input type="password" name="password" id="password" placeholder="password" value={this.props.password} onChange={this.props.handleInputChange} valid={this.state.validPassword} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="confirmPassword">Confirm</Label>
@@ -139,7 +139,7 @@ class Signup extends Component {
                             <Submit onClick={this.props.handleSignup} color="danger" disabled>Signup</Submit>
                         )}
                     <P className="signupLink">
-                        <LogIn to="/login">already signed up?  Login here</LogIn>
+                        <LogIn href="/login">already signed up?  Login here</LogIn>
                     </P>
                 </Form>
             </Container>
