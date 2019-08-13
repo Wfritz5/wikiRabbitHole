@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
+import scrape from "../../utils/scrape"
+
 
 class Home extends Component {
+
 
     state = {
         loggedIn: false,
@@ -12,6 +15,10 @@ class Home extends Component {
     componentDidMount() {
         // this.viewSavedArticles();
         this.loggedIn();
+    }
+
+    scrapeResource = (url) => {
+        scrape(url);
     }
 
     // viewSavedArticles = () => {}
@@ -34,7 +41,7 @@ class Home extends Component {
                 {this.state.loggedIn ? (
                     <Button color="warning" block>View Saved Articles</Button>
                 ) : (<></>)}
-                <SearchForm></SearchForm>
+                <SearchForm scrape={() => { this.scrapeResource() }}></SearchForm>
             </div>
         );
     }
