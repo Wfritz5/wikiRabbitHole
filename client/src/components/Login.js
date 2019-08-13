@@ -8,11 +8,14 @@ margin:0.5em;
 const FormGroup = styled.fieldset`
 border:none;
 `;
-
+const Rule = styled.hr`
+margin:1em;
+`;
 const SignUp = styled.a`
 color:white;
 text-decoration:none;
 margin:0.5em;
+text-align:right;
 `;
 
 const Title = styled.h2`
@@ -30,14 +33,27 @@ font-size:0.8em;
 margin:0px 0px 2px 5%;`;
 
 const Container = styled.div`
-display:relative;
+display:flex;
+justify-content:center;
+width:100%;
 margin:5em;
 `;
+
+const P = styled.p`
+color:white;
+margin:0.5em;
+text-align:right;
+`;
+
+const InputStyleR = {
+    marginLeft: 0.2 + "em"
+}
 
 function Login(props) {
     return (
         <Container className="login">
             <Title className="loginTitle title-font">Login</Title>
+            <Rule></Rule>
             {props.message ? (
                 <alert className="animated fadeIn" color="danger">{props.message}</alert>
             ) : (<></>)}
@@ -60,16 +76,17 @@ function Login(props) {
                         id="password"
                         placeholder="password"
                         value={props.password}
-                        onChange={props.handleInputChange} />
+                        onChange={props.handleInputChange}
+                        style={InputStyleR} />
                 </FormGroup>
                 <Submit
                     id="loginButton"
                     onClick={props.handleLogin}>
                     Login
                 </Submit>
-                <p className="signupLink">
+                <P className="signupLink">
                     <SignUp href="/signup">No account? Sign up here</SignUp>
-                </p>
+                </P>
             </form>
         </Container>
     );

@@ -25,6 +25,7 @@ color:white;
 const P = styled.p`
 color:white;
 margin:0.5em;
+text-align:right;
 `;
 
 const Submit = styled.button`
