@@ -10,6 +10,11 @@ class Home extends Component {
 
     state = {
         loggedIn: false,
+        href: "",
+        links: [],
+        image: "",
+        article: "",
+        title: ""
     };
 
     componentDidMount() {
@@ -18,8 +23,19 @@ class Home extends Component {
     }
 
     scrapeResource = (url) => {
-        scrape(url);
+        scrape(url, (result) => {
+            this.setState({
+                href: result.url,
+                links: result.randomLinks,
+                image: result.image,
+                article: "",
+                title: result.title
+            })
+            console.log(this.state);
+        });
     }
+
+
 
     // viewSavedArticles = () => {}
 

@@ -3,7 +3,7 @@ import randomLinkGenerator from "./randomLinkGenerator"
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-export default function scrape(url) {
+export default async function scrape(url, cb) {
   axios.get(url).then(response => {
     const result = {};
     const linkArr = [];
@@ -32,13 +32,13 @@ export default function scrape(url) {
           $(".fullImageLink").each(function (i, element) {
             result.image = $(this).children("a").attr("href")
             console.log(result)
-            return result;
+            cb(result);
           });
         });
       } else {
         result.image = noImage;
         console.log(`Image not found ${result}`)
-        return result
+        cb(result)
       }
     });
   })
