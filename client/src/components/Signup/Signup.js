@@ -1,6 +1,43 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText, Alert } from "reactstrap";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+
+const Label = styled.label`
+color:white;
+margin:0.5em;
+`;
+const FormGroup = styled.fieldset`
+border:none;
+`;
+
+const LogIn = styled.a`
+color:white;
+text-decoration:none;
+margin:0.5em;
+`;
+
+const Title = styled.h2`
+color:white;
+`;
+
+const P = styled.p`
+color:white;
+margin:0.5em;
+`;
+
+const Submit = styled.button`
+background-color:#000000;
+color:#DCDCDC;
+border: 1px solid white;
+border-radius:25px;
+height:25px;
+box-shadow: 0 0 10px #666666;
+font-size:0.8em;
+margin:0px 0px 2px 5%;`;
+
+const Container = styled.div`
+display:relative;
+margin:5em;
+`;
 
 class Signup extends Component {
     state = {
@@ -58,37 +95,36 @@ class Signup extends Component {
 
     render() {
         return (
-            <div>
-                <h2 className="loginTitle title-font">Signup</h2>
-                <hr />
+            <Container>
+                <Title className="loginTitle title-font">Signup</Title>
                 {this.props.message ? (
-                    <Alert className="animated fadeIn" color="danger">{this.props.message}</Alert>
+                    <alert className="animated fadeIn" color="danger">{this.props.message}</alert>
                 ) : (<></>)}
-                <Form>
+                <form>
                     <FormGroup>
-                        <Label for="username">Username</Label>
-                        <Input type="text" name="username" id="username" placeholder="username" value={this.props.username} onChange={this.props.handleInputChange} valid={this.state.validUsername} />
+                        <Label htmlFor="username">Username</Label>
+                        <input type="text" name="username" id="username" placeholder="username" value={this.props.username} onChange={this.props.handleInputChange} valid={this.state.validUsername} />
                     </FormGroup>
                     <FormGroup>
                         <Label for="password">Password</Label>
-                        <Input type="password" name="password" id="password" placeholder="password" value={this.props.password} onChange={this.props.handleInputChange} valid={this.state.validPassword} />
+                        <input type="password" name="password" id="password" placeholder="password" value={this.props.password} onChange={this.props.handleInputChange} valid={this.state.validPassword} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="confirmPassword">Confirm Password</Label>
-                        <Input type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm password" value={this.props.confirmPassword} onChange={this.props.handleInputChange} valid={this.state.confirmPassword} />
-                        <FormText>at least 8 characters, 1 capital & 1 number</FormText>
+                        <Label htmlFor="confirmPassword">Confirm Password</Label>
+                        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm password" value={this.props.confirmPassword} onChange={this.props.handleInputChange} valid={this.state.confirmPassword} />
+                        <P><small>( at least 8 characters, 1 capital & 1 number )</small></P>
                     </FormGroup>
                     {/* if all fields are valid, allow the user to submit the form */}
                     {(this.state.validUsername && this.state.validPassword && this.state.confirmPassword) ? (
-                        <Button onClick={this.props.handleSignup} color="success" block>Signup</Button>
+                        <Submit onClick={this.props.handleSignup} color="success" >Signup</Submit>
                     ) : (
-                            <Button onClick={this.props.handleSignup} color="danger" block disabled>Signup</Button>
+                            <Submit onClick={this.props.handleSignup} color="danger" disabled>Signup</Submit>
                         )}
-                    <p className="signupLink">
-                        <Link to="/login">already have an account?  Sign in here</Link>
-                    </p>
-                </Form>
-            </div>
+                    <P className="signupLink">
+                        <LogIn to="/login">already signed up?  Login here</LogIn>
+                    </P>
+                </form>
+            </Container>
         );
     }
 }

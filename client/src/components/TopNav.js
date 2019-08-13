@@ -18,7 +18,8 @@ import logo from "../assets/logo.svg";
 
 
 const Navigation = styled.nav`
-
+display:inline-block;
+width:100%;
 `;
 
 const LogoImg = styled.img`
