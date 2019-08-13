@@ -22,7 +22,7 @@ transition: background 0.2s;
 const RandomButton = () => {
 
 
-  return (< Random id={
+  return (<Random id={
     "random-search"
   }
     label={
