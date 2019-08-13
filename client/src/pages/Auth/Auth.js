@@ -67,7 +67,7 @@ class Auth extends Component {
                         user: user.data.user
                     });
                     console.log("log in successful");
-                    window.location.href = '/profile';
+                    window.location.href = '/';
                 } else {
                     console.log("something went wrong :(")
                     console.log(user.data);
