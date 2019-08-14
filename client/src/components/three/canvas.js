@@ -16,9 +16,8 @@ class Canvas extends Component {
     componentDidMount() {
         const width = this.mount.clientWidth;
         const height = this.mount.clientHeight;
-
-
         this.scene = new THREE.Scene();
+        this.mouse = new THREE.Vector2();
         this.camera = new THREE.PerspectiveCamera(1000, width / height, 0.1, 10000);
         this.renderer = new THREE.WebGLRenderer({
             antialias: true,
@@ -33,16 +32,11 @@ class Canvas extends Component {
         this.renderer.setClearColor(0xffffff, 0);
         this.renderButtons();
         this.animate();
-        console.log(this.scene)
     }
 
     componentDidUpdate() {
-        this.raycaster = new THREE.Raycaster();
-        this.mouse = new THREE.Vector2();
         this.mouse.x = this.state.x;
         this.mouse.y = this.state.y;
-        this.raycaster.setFromCamera(this.mouse.clone(), this.camera);
-
     }
 
     componentWillReceiveProps() {
@@ -67,6 +61,7 @@ class Canvas extends Component {
             this.scene.remove(this.scene.children[0]);
         }
         this.renderButtons();
+
 
 
     }
