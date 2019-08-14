@@ -5,11 +5,13 @@ const raburlController = require("../../controllers/raburlController");
   //  .get(userController.findAll)
     
 
-router.route("rabbitUrl/:userId")
+router.route("/:userId")
     .post(raburlController.create);
-router.route("rabbitUrl/:id")
+router.route("/:id")
     .get(raburlController.findById)  
     .put(raburlController.update)
     .delete(raburlController.remove);
+router.route("/keyWord/:word")
+    .get(reburlController.findByKeyWord);
 
 module.exports = router;
