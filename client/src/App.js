@@ -12,6 +12,9 @@ import NoMatch from "./pages/NoMatch";
 import TopNav from "./components/TopNav";
 
 const Container = styled.div`
+position:absolute;
+display: grid;
+grid-template-rows: 1fr 9fr;
 width:100vw;
 height:100vh;
 background-color:#111111;

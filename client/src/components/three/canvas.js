@@ -10,12 +10,25 @@ class Canvas extends Component {
         this.initializeCamera = this.initializeCamera.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.state = { x: 0, y: 0 };
+        this.state = { x: 0, y: 0, width:window.innerWidth, height: window.innerHeight};
         this.renderButtons = this.renderButtons.bind(this);
     }
+
+    updateDimensions() {
+        if(window.innerWidth < 500) {
+          this.setState({ width: 450, height: 102 });
+        } else {
+          let update_width  = window.innerWidth;
+          let update_height = window.innerHeight;
+          this.setState({ width: update_width, height: update_height });
+        }
+      }
+
     componentDidMount() {
-        const width = this.mount.clientWidth;
-        const height = this.mount.clientHeight;
+        this.updateDimensions();
+        window.addEventListener("resize", this.updateDimensions.bind(this));
+        const width = this.state.width;
+        const height = this.state.height;
         this.scene = new THREE.Scene();
         this.mouse = new THREE.Vector2();
         this.camera = new THREE.PerspectiveCamera(1000, width / height, 0.1, 10000);
@@ -32,6 +45,7 @@ class Canvas extends Component {
         this.renderer.setClearColor(0xffffff, 0);
         this.renderButtons();
         this.animate();
+        console.log(`${window.innerWidth},${window.innerHeight}`)
     }
 
     componentDidUpdate() {

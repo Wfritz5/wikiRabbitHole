@@ -4,14 +4,20 @@ import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
 import Canvas from "../../components/three/canvas.js";
 import scrape from "../../utils/scrape";
+import styled from "styled-components";
 
+const Container = styled.div`
+position:relative;
+width:100%;
+clear:both;
+`;
 
 class Home extends Component {
-
 
     state = {
         loggedIn: false,
         href: "",
+        linkTitles: [],
         links: [],
         image: "",
         article: "",
@@ -26,10 +32,9 @@ class Home extends Component {
 
     scrapeResource = (url) => {
         scrape(url, (result) => {
-            console.log(result.randomLinks);
             for (let i = 0; i < this.state.linkLength; i++) {
-                console.log(result.randomLinks[i])
-                this.state.links.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
+                this.state.links.push(result.randomLinks[i]);
+                this.state.linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
 
             }
             this.setState({
@@ -59,13 +64,13 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="homeBox">
+            <Container className="homeBox">
                 {this.state.loggedIn ? (
                     <Button color="warning" block>View Saved Articles</Button>
                 ) : (<></>)}
                 <SearchForm scrape={(url) => this.scrapeResource(url)} />
                 <Canvas state={this.state} scrape={(url) => this.scrapeResource(url)} />
-            </div >
+            </Container >
         );
     }
 }
