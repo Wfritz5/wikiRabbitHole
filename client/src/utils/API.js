@@ -39,5 +39,8 @@ export default {
 
     deleteUrl: function(id){
         return axios.delete(`/api/rabUrl/:${id}`)
+    },
+    findUrlByKeyWord: function(word) {
+        return axios.get(`/api/rabUrl/keyWord/:${word}`)
     }
 };
