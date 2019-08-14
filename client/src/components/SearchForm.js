@@ -8,7 +8,7 @@ import searchDetail from "../assets/search_detail.svg"
 import randButton from "../assets/random.svg";
 import randDetail from "../assets/random_detail.svg";
 
-const Input = styled.input `
+const Input = styled.input`
 border: 1px solid white;
 padding:5px 10px;
 border-radius: 15px;
@@ -21,7 +21,7 @@ box-shadow: 0 0 10px #666666;
 margin:0px 5% 0px 5%;
 `;
 
-const Search = styled.button `
+const Search = styled.button`
 background: url('${searchButton}') no-repeat;
 background-size:cover;
 background-size:contain;
@@ -37,7 +37,7 @@ background-size:50%;
 }
 `;
 
-const Random = styled.button `
+const Random = styled.button`
 background: url('${randButton}') no-repeat;
 background-size:contain;
 min-height:40px;
@@ -52,7 +52,7 @@ transition: background 0.2s;
   background-size:50%;
   }`;
 
-const Form = styled.form `
+const Form = styled.form`
 display:flex;
 border: none;
 border-radius: 3px;
@@ -62,7 +62,7 @@ align-content:center;
 justify-content:center;
 `
 
-const Clear = styled.button `
+const Clear = styled.button`
 background-color:#000000;
 color:#DCDCDC;
 border: 1px solid white;
@@ -73,7 +73,7 @@ font-size:0.8em;
 margin:0px 0px 2px 5%;`;
 
 
-const Container = styled.div `
+const Container = styled.div`
 position:absolute;
 width: 100%;
 align-content: center;
@@ -114,71 +114,32 @@ class SearchForm extends Component {
     }
 
     render() {
-        return ( <
-                Container >
-                <
-                Form id = "wiki-form"
-                onSubmit = {
-                    event => event.preventDefault()
-                } > {
-                    /* <label htmlFor="wikiSearch"> Wikipedia Search </label> */
-                } <
-                Clear id = {
-                    "clear-search"
-                }
-                label = {
-                    "Clear"
-                }
-                onClick = {
-                    () => this.setState({
-                        term: ""
-                    })
-                }
-                type = {
-                    "reset"
-                } > clear < /Clear>
+        return (
+            <Container>
+                <Form id="wiki-form"
+                    onSubmit={event => event.preventDefault()}>
+                    <Clear id={"clear-search"}
+                        label={"Clear"}
+                        onClick={() => this.setState({ term: "" })}
+                        type={"reset"}> clear </Clear>
 
-                <
-                Input type = "text"
-                name = "wikiSearch"
-                id = "wikiSearch"
-                placeholder = ". . ."
-                value = {
-                    this.state.term
-                }
-                onChange = {
-                    this.handleInputChange
-                }
-                /> {
-                /* This button will submit the form */
-            } {
-                /* This button will clear the search field */
-            } <
-            Random id = {
-                "random-search"
-            }
-        label = {
-            "Random"
-        }
-        onClick = {
-            (e) => {
-                this.random(e)
-            }
-        }
-        type = {
-            "submit"
-        }
-        /> <
-        Search onClick = {
-            (e) => {
-                this.search(e, this.state.term)
-            }
-        }
-        /> < /
-        Form > <
-            /Container >
-    );
-}
+                    <Input type="text"
+                        name="wikiSearch"
+                        id="wikiSearch"
+                        placeholder=". . ."
+                        value={this.state.term}
+                        onChange={this.handleInputChange} />
+                    <Random id={"random-search"}
+                        label={"Random"}
+                        onClick={
+                            (e) => { this.random(e) }}
+                        type={"submit"} />
+                    <Search onClick={
+                        (e) => { this.search(e, this.state.term) }} />
+                </Form>
+            </Container>
+        );
+    }
 }
 
 export default SearchForm;
