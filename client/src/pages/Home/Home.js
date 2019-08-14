@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
 import Canvas from "../../components/three/canvas.js";
-import scrape from "../../utils/scrape"
+import scrape from "../../utils/scrape";
 
 
 class Home extends Component {
@@ -15,7 +15,8 @@ class Home extends Component {
         links: [],
         image: "",
         article: "",
-        title: ""
+        title: "",
+        linkLength: 5
     };
 
     componentDidMount() {
@@ -25,14 +26,18 @@ class Home extends Component {
 
     scrapeResource = (url) => {
         scrape(url, (result) => {
+            console.log(result.randomLinks);
+            for (let i = 0; i < this.state.linkLength; i++) {
+                console.log(result.randomLinks[i])
+                this.state.links.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
+
+            }
             this.setState({
                 href: result.url,
-                links: result.randomLinks,
                 image: result.image,
                 article: "",
                 title: result.title
             })
-            console.log(this.state);
         });
     }
 
