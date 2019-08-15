@@ -19,6 +19,9 @@ color:white;
 width:50%;
 box-shadow: 0 0 10px #666666;
 margin:0px 5% 0px 5%;
+&:focus {
+    outline: 0;
+}
 `;
 
 const Search = styled.button`
@@ -35,6 +38,10 @@ transition: background 0.2s;
 background: url('${searchDetail}') no-repeat;
 background-size:50%;
 }
+
+&:focus {
+    outline: 0;
+}
 `;
 
 const Random = styled.button`
@@ -46,11 +53,14 @@ border:0;
 margin:2px 0px 0px 0px;
 transition: background 0.2s;
 
-
 &:hover{
   background: url('${randDetail}') no-repeat;
   background-size:50%;
-  }`;
+  }
+  
+&:focus {
+    outline: 0;
+}`;
 
 const Form = styled.form`
 display:flex;
@@ -70,16 +80,18 @@ border-radius:25px;
 height:25px;
 box-shadow: 0 0 10px #666666;
 font-size:0.8em;
-margin:0px 0px 2px 5%;`;
+margin:0px 0px 2px 5%;
+&:focus {
+    outline: 0;
+}`;
 
 
 const Container = styled.div`
-position:absolute;
+position:relative;
 width: 100%;
 align-content: center;
 justify-content: center;
 display: flex;
-margin: 5em 1em 0 0
 z-index:1000;`
 
 class SearchForm extends Component {
@@ -103,13 +115,11 @@ class SearchForm extends Component {
 
     search = (event, url) => {
         event.preventDefault();
-        console.log("search")
         this.props.scrape("https://en.wikipedia.org/wiki/" + url);
     }
 
     random = (event) => {
         event.preventDefault();
-        console.log("clicked")
         this.props.scrape("https://en.wikipedia.org/wiki/Special:Random");
     }
 
