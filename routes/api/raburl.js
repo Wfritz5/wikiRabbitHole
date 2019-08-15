@@ -12,6 +12,6 @@ router.route("/:id")
     .put(raburlController.update)
     .delete(raburlController.remove);
 router.route("/keyWord/:word")
-    .get(reburlController.findByKeyWord);
+    .get(raburlController.findByKeyWord);
 
 module.exports = router;
