@@ -10,10 +10,22 @@ const logger = require("morgan");
 const flash = require('connect-flash');
 const cors = require('cors');
 
-app.use(cors({
-  origin: "https://wikirabbithole.herokuapp.com",
-  credentials: true
-}))
+// app.use(cors());
+// app.options('*', cors());
+
+// app.use(function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', "https://wikipedia.org/wiki/");
+//   res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept");
+//   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+//   next();
+// }),
+
+// headers: {
+//   'Accept': 'application/json',
+//   'Content-Type': 'application/json',
+//   'Access-Control-Allow-Origin': 'https://wikirabbithole.herokuapp.com/',
+//   'Access-Control-Allow-Methods': 'GET, POST'
+// }
 
 app.use(express.urlencoded({
   extended: true
