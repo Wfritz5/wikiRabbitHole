@@ -10,7 +10,11 @@ const logger = require("morgan");
 const flash = require('connect-flash');
 const cors = require('cors');
 
-app.use(cors())
+app.use(cors({
+  origin: "https://wikirabbithole.herokuapp.com",
+  credentials: true
+}))
+
 app.use(express.urlencoded({
   extended: true
 }));
