@@ -25,7 +25,13 @@ var RabUrlSchema = new Schema ({
     image: {
         type: String
     },
-    keyWords: [],
+    userId: {
+        // Store OjectIds
+        type: Schema.Types.ObjectId,
+        // The ObjectIds will refer to the ids in the User model
+        ref: "User"
+    },
+    keyWords: []
 });
 
 //This creates the model from the above schema, using mongoose's model method
