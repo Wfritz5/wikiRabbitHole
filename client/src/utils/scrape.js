@@ -10,7 +10,7 @@ export default async function scrape(url, cb) {
     const $ = cheerio.load(response.data);
     $(".mw-body").each(function (i, element) {
       result.title = $(this).children("h1#firstHeading").text();
-      // result.summary = $(this).find("p").text();
+      result.summary = $(this).find("p").text().substring(0, 150);
       result.image = $(this).find(".image").attr("href");
       const links = $(this).find("a");
       result.url = `https://wikipedia.org/wiki/${result.title.replace(/ /g, "_")}`;
@@ -27,7 +27,9 @@ export default async function scrape(url, cb) {
       if (result.image) {
         // need to check for `https://en.wikimedia.org${result.image}` as well
         result.image = `https://commons.wikimedia.org${result.image}`
-        axios.get(result.image).then(function (response) {
+        axios.get(result.image).catch(function (error) {
+          console.log(error);
+        }).then(function (response) {
           const $ = cheerio.load(response.data);
           $(".fullImageLink").each(function (i, element) {
             result.image = $(this).children("a").attr("href")
@@ -37,7 +39,8 @@ export default async function scrape(url, cb) {
         });
       } else {
         result.image = noImage;
-        console.log(`Image not found ${result}`)
+        console.log("Image not found")
+        console.log(result)
         cb(result)
       }
     });

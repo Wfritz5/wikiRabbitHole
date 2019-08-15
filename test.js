@@ -59,7 +59,7 @@ describe("Array", function() {
  });/**
   * Test case to check whether the given element is loaded.
   */
- it("Should check whether the given element is loaded", function() {
+ it("Should chessck whether the given element is loaded", function() {
   return new Promise((resolve, reject) => {
    browser
     .findElement({ id: "sel-button" })
