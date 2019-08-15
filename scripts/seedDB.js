@@ -21,7 +21,7 @@ const raburlSeed = [{
         summary: "Global warming run amok",
         urlString: "https://en.wikipedia.org/wiki/Dagobah",
         image: "https://en.wikipedia.org/wiki/File:Dagobah.jpg",
-        keyWords: ["yoda", "pandemic", "mountains"]
+        keyWords: ["yoda", "pandemic", "mountains", "Ignis"]
     },
     {
         title: "William Wallace",
@@ -48,8 +48,13 @@ insertUser = function(idObj) {
         userSeed[0].rabUrl.push(idObj[1]);
         userSeed[0].rabUrl.push(idObj[2]);
     })
-    .then(() => db.User.collection.insertMany(userSeed))
+    .then( () => db.User.collection.insertMany(userSeed))
     .then(userData => {
+        console.log("ObjId of user: ", userData.ops[0]._id);
+        console.log("rabUrl first obj: ", idObj[0]);
+        idObj[0].userId = userData.ops[0]._id;
+        idObj[1].userId = userData.ops[0]._id;
+        idObj[2].userId = userData.ops[0]._id;
         console.log(userData.result.n + " records inserted!");
         console.log(userData);
         process.exit(0);

@@ -42,5 +42,8 @@ export default {
     },
     findUrlByKeyWord: function (word) {
         return axios.get(`/api/rabUrl/keyWord/${word}`)
+    },
+    findUrlBySingleUserKeyWord: function (word) {
+        return axios.get(`/api/rabUrl/keyWord/${userId}/${word}`)
     }
 };

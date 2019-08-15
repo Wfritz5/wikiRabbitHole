@@ -44,5 +44,14 @@ module.exports = {
             })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+    findSingleUserKeyWord: function (req,res) {
+        db.RabUrl
+            .find({
+                userId: req.params.userId,
+                keyWords: req.params.word
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 };
