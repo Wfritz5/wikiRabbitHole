@@ -39,18 +39,18 @@ export default async function scrape(url, cb) {
       //         cb(result);
       //       });
       //     } else {
-            // axios.get(`https://duckduckgo.com/?q=${result.image}&t=hj&iar=images&iax=images&ia=images&iaf=size%3AMedium`)
-            // .then(function (response) {
-            //   console.log("THIS IS WORKING")
-            //   const $ = cheerio.load(response.data);
-            //   console.log(response)
-            //   $(".tile-wrap").each(function (i, element) {
-            //     result.image = $(this).find(".tile--img__img").attr("src");
-                console.log("result")
-            //     console.log(result.image)
-                cb(result);
-            //   });
-            // })
+      // axios.get(`https://duckduckgo.com/?q=${result.image}&t=hj&iar=images&iax=images&ia=images&iaf=size%3AMedium`)
+      // .then(function (response) {
+      //   console.log("THIS IS WORKING")
+      //   const $ = cheerio.load(response.data);
+      //   console.log(response)
+      //   $(".tile-wrap").each(function (i, element) {
+      //     result.image = $(this).find(".tile--img__img").attr("src");
+      console.log("result")
+      //     console.log(result.image)
+      cb(result);
+      //   });
+      // })
       //     }
       //   });
       // } else {
