@@ -34,8 +34,9 @@ class Home extends Component {
         scrape(url, (result) => {
             for (let i = 0; i < this.state.linkLength; i++) {
                 this.state.links.push(result.randomLinks[i]);
+                if (result.randomLinks[i]) {
                 this.state.linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
-
+                }
             }
             this.setState({
                 href: result.url,
