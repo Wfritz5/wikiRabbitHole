@@ -24,12 +24,12 @@ z-index:1000;
 position:fixed;
 `;
 
-const LogoImg = styled.img`
-display:inline-block;
-height:50px;
-width:auto;
+// const LogoImg = styled.img`
+// display:inline-block;
+// height:50px;
+// width:auto;
 
-`;
+// `;
 
 const Project = styled.h2`
 color:#FFFFFF;
