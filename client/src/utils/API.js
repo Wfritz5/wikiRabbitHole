@@ -25,22 +25,22 @@ export default {
     //     return axios.get("/api/scrape");
     // }
 
-    addUrl: function(userId){
-        return axios.post(`/api/rabUrl/:${userId}`)
+    addUrl: function (userId) {
+        return axios.post(`/api/rabUrl/${userId}`)
     },
 
-    getUrl: function(id){
-        return axios.get(`/api/rabUrl/:${id}`)
+    getUrl: function (id) {
+        return axios.get(`/api/rabUrl/${id}`)
     },
 
-    updateUrl: function(id){
-        return axios.put(`/api/rabUrl/:${id}`)
+    updateUrl: function (id) {
+        return axios.put(`/api/rabUrl/${id}`)
     },
 
-    deleteUrl: function(id){
-        return axios.delete(`/api/rabUrl/:${id}`)
+    deleteUrl: function (id) {
+        return axios.delete(`/api/rabUrl/${id}`)
     },
-    findUrlByKeyWord: function(word) {
-        return axios.get(`/api/rabUrl/keyWord/:${word}`)
+    findUrlByKeyWord: function (word) {
+        return axios.get(`/api/rabUrl/keyWord/${word}`)
     }
 };
