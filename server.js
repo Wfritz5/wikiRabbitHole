@@ -8,7 +8,9 @@ const session = require("express-session");
 const passport = require("passport");
 const logger = require("morgan");
 const flash = require('connect-flash');
+const cors = require('cors');
 
+app.use(cors())
 app.use(express.urlencoded({
   extended: true
 }));
