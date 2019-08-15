@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/wikidatabase", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://username:password1@ds163517.mlab.com:63517/heroku_7c3rgqkz", {
   useNewUrlParser: true
 }, function (err) {
   if (err) throw err;
