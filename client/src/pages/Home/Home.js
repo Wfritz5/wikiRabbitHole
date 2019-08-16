@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
+import SlideNav from "../../components/SlideNav.js";
 import Canvas from "../../components/three/canvas.js";
 import scrape from "../../utils/scrape";
 import styled from "styled-components";
@@ -35,7 +36,7 @@ class Home extends Component {
             for (let i = 0; i < this.state.linkLength; i++) {
                 this.state.links.push(result.randomLinks[i]);
                 if (result.randomLinks[i]) {
-                this.state.linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
+                    this.state.linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
                 }
             }
             this.setState({
@@ -70,6 +71,7 @@ class Home extends Component {
                     <Button color="warning" block>View Saved Articles</Button>
                 ) : (<></>)}
                 <SearchForm scrape={(url) => this.scrapeResource(url)} />
+                <SlideNav></SlideNav>
                 <Canvas state={this.state} scrape={(url) => this.scrapeResource(url)} />
             </Container >
         );
