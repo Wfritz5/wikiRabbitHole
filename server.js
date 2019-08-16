@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3001;
 const colors = require("colors");
 const mongoose = require("mongoose");
@@ -8,28 +10,28 @@ const session = require("express-session");
 const passport = require("passport");
 const logger = require("morgan");
 const flash = require('connect-flash');
-const cors = require('cors');
 
-// app.use(cors());
+app.use(cors());
+app.use(bodyParser.json());
 // app.options('*', cors());
 
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', "https://wikipedia.org/wiki/");
-//   res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept");
-//   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-//   next();
-// }),
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  }),
 
-// headers: {
-//   'Accept': 'application/json',
-//   'Content-Type': 'application/json',
-//   'Access-Control-Allow-Origin': 'https://wikirabbithole.herokuapp.com/',
-//   'Access-Control-Allow-Methods': 'GET, POST'
-// }
+  // headers: {
+  //   'Accept': 'application/json',
+  //   'Content-Type': 'application/json',
+  //   'Access-Control-Allow-Origin': 'https://wikirabbithole.herokuapp.com/',
+  //   'Access-Control-Allow-Methods': 'GET, POST'
+  // }
 
-app.use(express.urlencoded({
-  extended: true
-}));
+  app.use(express.urlencoded({
+    extended: true
+  }));
 app.use(express.json());
 app.use(logger("dev"));
 app.use(flash())
