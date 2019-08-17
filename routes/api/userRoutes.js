@@ -8,8 +8,8 @@ const userController = require("../../controllers/userController");
 //     .get(userController.findAll)
 //     .post(userController.create);
 
-// router.route("/api/users/login/:username")
-//     .get(userController.findByUsername);
+ router.route("/username/:username")
+     .get(userController.findByUsername);
 
 // router.route("/api/users/signup")
 //     .post(userController.create)
@@ -18,10 +18,10 @@ const userController = require("../../controllers/userController");
 //     .get(userController.findById)
 
 
-// router.route("/:id")
-//     .get(userController.findById)
-//     .put(userController.update)
-//     .delete(userController.remove);
+ router.route("/:id")
+     .get(userController.findById)
+     .put(userController.update)
+     .delete(userController.remove);
 
 
 router.post("/login", passport.authenticate("local", {
