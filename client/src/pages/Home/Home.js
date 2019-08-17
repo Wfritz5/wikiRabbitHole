@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
-import SlideNav from "../../components/SlideNav.js";
+import SlideNav from "../../components/SlideNav";
 import Canvas from "../../components/three/canvas.js";
 import scrape from "../../utils/scrape";
 import styled from "styled-components";
@@ -15,18 +15,19 @@ clear:both;
 
 class Home extends Component {
 
-   constructor(props){
-       super(props)
+    constructor(props) {
+        super(props)
         this.state = {
-        loggedIn: false,
-        href: "",
-        linkTitles: [],
-        links: [],
-        image: "",
-        article: "",
-        title: "",
-        linkLength: 5
-    };}
+            loggedIn: false,
+            href: "",
+            linkTitles: [],
+            links: [],
+            image: "",
+            article: "",
+            title: "",
+            linkLength: 5
+        };
+    }
 
     componentDidMount() {
         // this.viewSavedArticles();
@@ -35,12 +36,12 @@ class Home extends Component {
 
     scrapeResource = (url) => {
         scrape(url, (result) => {
-            let links =[];
-            let linkTitles=[];
+            let links = [];
+            let linkTitles = [];
             for (let i = 0; i < this.state.linkLength; i++) {
                 links.push(result.randomLinks[i]);
                 if (result.randomLinks[i]) {
-                linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
+                    linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
                 }
             }
             this.setState({
