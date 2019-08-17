@@ -21,7 +21,6 @@ const raburlSeed = [{
         summary: "Global warming run amok",
         urlString: "https://en.wikipedia.org/wiki/Dagobah",
         image: "https://en.wikipedia.org/wiki/File:Dagobah.jpg",
-        userId: null,
         keyWords: ["yoda", "pandemic", "mountains", "Ignis"]
     },
     {
@@ -61,26 +60,50 @@ insertUser = function(idObj) {
         console.log(userData.result.n + " records inserted!");
         console.log(userData);
     })
-    .then( () =>  {
-        console.log( "idObj[0]._id: ", idObj[0]._id);
-        console.log("userId to insert there: ", idObj[0].userId)
-        const filter = { _id: idObj[0]._id };
-        const update = { userId: idObj[0].userId };
-        db.RabUrl.findByIdAndUpdate(idObj[0]._id, update);
-           
-            
-    })
-    .then( () =>  {
-        const filter = { _id: idObj[1]._id };
-        const update = { userId: idObj[1].userId };
-        db.RabUrl.findByIdAndUpdate(idObj[1]._id, update);
-    })
-    .then( () =>  {
-        const filter = { _id: idObj[2]._id };
-        const update = { userId: idObj[2].userId };
-        db.RabUrl.collection.findOneAndUpdate(filter, update);
-        process.exit(0);
-    })
+    // .then( () =>  {
+    //     console.log( "idObj[0]._id: ", idObj[0]._id);
+    //     console.log( "idObj[1]._id: ", idObj[1]._id);
+    //     console.log( "idObj[2]._id: ", idObj[2]._id);
+    //     console.log("userId to insert there: ", idObj[0].userId)
+    //     const filter = { _id: idObj[0]._id };
+    //     const theUpdate = { userId: idObj[0].userId };
+    //     console.log('the update', theUpdate)
+    //     // db.RabUrl.findByIdAndUpdate(idObj[0]._id, { $set: theUpdate})
+    //     db.RabUrl.findByIdAndUpdate(idObj[0]._id, { $set: {userId: idObj[0].userId}})
+    //     .then(data => {
+    //         console.log('it worded', data);
+    //     }).catch(err =>{
+    //         console.error('error', err);
+    //     })  
+    //     console.log('passes the findoneandupdate')      
+    // })
+    .then(() => db.RabUrl.findByIdAndUpdate(idObj[0]._id, { $set: {userId: idObj[0].userId}}))
+    .then( (data) =>  {
+        console.log('data', data) })
+        // const filter = { _id: idObj[1]._id };
+        // const update = { userId: idObj[1].userId };
+        // db.RabUrl.findByIdAndUpdate(idObj[1]._id, update)
+        // .catch(err =>{
+        //     console.error(err);
+        //     process.exit(1);
+        //     })        ;
+    .then(() => db.RabUrl.findByIdAndUpdate(idObj[1]._id, { $set: {userId: idObj[0].userId}}))
+    .then( (data) =>  { console.log('data', data) })
+    .then(() =>  db.RabUrl.findByIdAndUpdate(idObj[2]._id, { $set: {userId: idObj[0].userId}}))
+       /*  {
+        const filter = { "_id": idObj[2]._id };
+        const update = { "userId": idObj[2].userId };
+        db.RabUrl.collection.findOneAndUpdate(filter, update)
+        .catch(err =>{
+            console.error(err);
+            process.exit(1);
+            })        ; */
+        //process.exit(0);
+        .then( (data) =>  {
+            console.log('data', data) ;
+            process.exit(0);
+        })
+    
     .catch(err => {
         console.error(err);
         process.exit(1);
