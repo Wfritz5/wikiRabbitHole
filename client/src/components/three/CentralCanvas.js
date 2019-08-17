@@ -13,7 +13,7 @@ class CentralCanvas extends React.Component {
 
     render (){
         return(
-        <Centered id='centeral'> </Centered>)
+        <Centered id='central'> </Centered>)
     };
 }
 
