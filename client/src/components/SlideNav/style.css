@@ -3,49 +3,82 @@ body {
 }
 
 .wrapper {
+    display: inline-block;
+    position: absolute;
     z-index: 1000;
+}
+
+.open {
+    width: 100%;
+}
+
+.closed {
+    width: 0;
 }
 
 .sidenav {
-    height: 100%;
-    width: 0;
+    top: 120px;
     position: fixed;
-    z-index: 1000;
-    top: 0;
+    bottom: 0;
     left: 0;
-    background-color: #111;
+    background-color: #fff;
+    opacity: 0.7;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
 }
 
 .sidenav button {
+    border: none;
+    position: absolute;
+    right: 0;
+    top: 0;
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
     display: block;
     transition: 0.3s;
+    background-color: #fff;
+    color: #000;
 }
 
 .sidenav button:hover {
-    color: #b60f0f;
+    color: rgb(255, 138, 138);
 }
 
 .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
+    /* top: 0;
+    right: 25px; */
     font-size: 36px;
     margin-left: 50px;
 }
 
-#main button {
+/* #main {
     z-index: 1000;
+} */
+
+#main button {
+    border: none;
+    position: fixed;
+    top: 63px;
+    left: 20px;
+    display: inline-block;
     font-size: 30px;
     cursor: pointer;
-    color: black;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 138, 138);
 
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
 }
 
 #main button:hover {
