@@ -9,7 +9,7 @@ const userController = require("../../controllers/userController");
 //     .post(userController.create);
 
  router.route("/username/:username")
-     .get(userController.findByUsername);
+     .get(userController.findByUserName);
 
 // router.route("/api/users/signup")
 //     .post(userController.create)
