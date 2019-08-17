@@ -2,6 +2,7 @@ import React, {
     Component
 } from "react";
 import * as THREE from "three";
+import { linkSync } from "fs";
 // const OrbitControls = require("three-orbit-controls")(THREE);
 class Canvas extends Component {
     constructor(props) {
@@ -16,14 +17,10 @@ class Canvas extends Component {
     }
 
     updateDimensions() {
-        if(window.innerWidth < 500) {
-          this.setState({ width: 450, height: 102 });
-        } else {
-          let update_width  = window.innerWidth;
-          let update_height = window.innerHeight;
-          this.setState({ width: update_width, height: update_height });
-        }
-      }
+        let update_width  = window.innerWidth;
+        let update_height = window.innerHeight;
+        this.setState({ width: update_width, height: update_height }); 
+    }
 
     componentDidMount() {
         this.updateDimensions();
@@ -37,7 +34,8 @@ class Canvas extends Component {
             antialias: true,
             alpha: true
         });
-
+        this.raycaster = new THREE.Raycaster();
+        this.renderer.domElement.addEventListener( 'mousemove', this.raycast.bind(this), false );
         // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.renderer.setSize(width, height);
         this.mount.appendChild(this.renderer.domElement);
@@ -58,11 +56,14 @@ class Canvas extends Component {
     // }
 
     componentDidUpdate() {
+        this.mount.removeChild(this.renderer.domElement);
         while (this.scene.children.length > 0) {
                 this.scene.remove(this.scene.children[0]);
                 }
         this.renderButtons();
         this.renderCentral();
+        this.renderer.setSize(this.state.width, this.state.height);
+        this.mount.appendChild(this.renderer.domElement);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -79,11 +80,33 @@ class Canvas extends Component {
 
 
     onMouseMove(e) {
-        this.mouse.x = e.clientX;
-        this.mouse.y = e.clientY;
+        this.mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+        this.mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+
     }
 
-    // onClick(e) {
+    raycast(e) {
+        if(this.props) {  
+        var intersects = this.raycaster.intersectObjects( this.scene.children[0].children );
+        this.raycaster.setFromCamera( this.mouse, this.camera );
+        console.log(intersects)
+        console.log(this.scene.children[0].children[0]);
+        // console.log(this.scene.children[0])
+
+        for(var i = 0; i < this.scene.children[0].children.length; i++){
+            if(intersects.length){
+                if (intersects[0].object === this.scene.children[0].children[i]){ 
+                    console.log(this.scene.children[0].children[i]);
+                    this.scene.children[0].children[i].material.color.setHex("0xff0000")
+                }else{            
+                    this.scene.children[0].children[i].material.color.setHex("0xffffff")
+                }
+            }else{            
+                this.scene.children[0].children[i].material.color.setHex("0xffffff")
+            }
+        }}
+    }
+    // onClick(e) {s
     //     while (this.scene.children.length > 0) {
     //         this.scene.remove(this.scene.children[0]);
     //     }
@@ -98,9 +121,9 @@ class Canvas extends Component {
             canvas.width = size;
             canvas.height = size;
             var context1 = canvas.getContext("2d");
-            context1.fillStyle = "#ff0000";
+            context1.fillStyle = "#686868";
             context1.textAlign = "center";
-            context1.font = "bold 40px Tahoma, Geneva, sans-serif";
+            context1.font = "bold 48px Tahoma, Geneva, sans-serif";
             context1.fillText(title, size/2, size/2);
             var texture1 = new THREE.Texture(canvas);
             texture1.needsUpdate = true;
@@ -123,6 +146,7 @@ class Canvas extends Component {
     }
     renderButtons() {
         const points = this.props.state.linkTitles;
+        const hrefs = this.props.state.links;
         var banners = new THREE.Group();
         for (var i = 0; i < points.length; i++) {
             var starGeometry = new THREE.Geometry();
@@ -133,13 +157,13 @@ class Canvas extends Component {
             var context1 = canvas.getContext("2d");
             context1.fillStyle = "#ffffff";
             context1.textAlign = "center";
-            context1.font = "normal 35px Tahoma, Geneva, sans-serif";
+            context1.font = "normal 30px Tahoma, Geneva, sans-serif";
             context1.fillText(points[i], size/2, size/2);
             var texture1 = new THREE.Texture(canvas);
             texture1.needsUpdate = true;
             var star = new THREE.Vector3();
-            star.x = THREE.Math.randFloatSpread(5);
-            star.y = THREE.Math.randFloatSpread(5);
+            star.x = THREE.Math.randFloatSpread(3+i);
+            star.y = THREE.Math.randFloatSpread(3+i);
             star.z = THREE.Math.randFloatSpread(1);
             starGeometry.vertices.push(star);
             var textMaterial = new THREE.PointsMaterial({
@@ -148,20 +172,13 @@ class Canvas extends Component {
                 depthTest: false,
                 transparent: true
             });
-
             var banner = new THREE.Points(starGeometry, textMaterial);
-
-            switch (i) {
-                case i:
-                    banner.name = points[i];
-                    break;
-            }
-
+            banner.name = points[i];
             banners.add(banner);
         }
 
         this.scene.add(banners);
-        banners.position.set(0, 1, 0)
+        banners.position.set(0, 0, 0)
     }
 
 
@@ -174,8 +191,9 @@ class Canvas extends Component {
         this.frameId = window.requestAnimationFrame(this.animate);
         this.renderer.render(this.scene, this.camera);
         this.scene.children[0].rotation.z -= 0.001;
-        this.camera.position.z = (this.mouse.x - this.mouse.y) * 0.0005+5;
-
+        this.camera.position.z = (this.mouse.x - this.mouse.y) * 0.2+5;
+        if(this.scene.children[1]){this.scene.children[1].position.z = (this.mouse.x - this.mouse.y) *.25;}
+        this.camera.rotation.y = (-this.mouse.x) * 0.02;
     }
 
     render() {
