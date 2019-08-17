@@ -154,20 +154,32 @@ class Canvas extends Component {
         for (var i = 0; i < points.length; i++) {
             var starGeometry = new THREE.Geometry();
             var canvas = document.createElement("canvas");
-            var size = 512;
+            var size = 1024;
             canvas.width = size;
             canvas.height = size;
             var context1 = canvas.getContext("2d");
             context1.fillStyle = "#ffffff";
             context1.textAlign = "center";
-            context1.font = "normal 14px Tahoma, Geneva, sans-serif";
+            context1.font = "normal 36px Tahoma, Geneva, sans-serif";
             wrapText(context1, points[i], size/2, size/2,300,30)
             var texture1 = new THREE.Texture(canvas);
             texture1.needsUpdate = true;
             var star = new THREE.Vector3();
-            star.x = THREE.Math.randFloatSpread(1)*(i+2);
-            star.y = THREE.Math.randFloatSpread(1)*(i+2);
+            star.x = THREE.Math.randFloatSpread(10);
+            star.y = THREE.Math.randFloatSpread(10);
             star.z = THREE.Math.randFloatSpread(2);
+            if(star.y<0 && star.y>-1){
+                star.y-=1
+            }
+            if(star.y>0 && star.y<1){
+                star.y+=1
+            }
+            if(star.x<0 && star.x>-1){
+                star.x-=-1
+            }
+            if(star.x>0 && star.x<1){
+                star.x+=1
+            }
             starGeometry.vertices.push(star);
             var textMaterial = new THREE.PointsMaterial({
                 size: 10,
@@ -194,7 +206,7 @@ class Canvas extends Component {
         this.frameId = window.requestAnimationFrame(this.animate);
         this.renderer.render(this.scene, this.camera);
         this.scene.children[0].rotation.z -= 0.001;
-        this.camera.position.z = (this.mouse.x - this.mouse.y) * 0.2+6;
+        this.camera.position.z = (this.mouse.x - this.mouse.y) * 0.2+10;
         if(this.scene.children[1]){this.scene.children[1].position.z = (this.mouse.x - this.mouse.y) *.25-3;}
         // this.scene.children[0].rotation.y += 0.0005;
     }
