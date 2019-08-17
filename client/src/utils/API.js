@@ -46,5 +46,17 @@ export default {
     },
     findUrlBySingleUserKeyWord: function (userId, word) {
         return axios.get(`/api/rabUrl/keyWord/${userId}/${word}`)
+    },
+    getUserByName: function (name){
+        return axios.get(`/api/users/username/${name}`)
+    },
+    getUserById: function (id){
+        return axios.get(`/api/users/${id}`)
+    },
+    updateUserById: function (id) {
+        return axios.put(`/api/users/${id}`)
+    },
+    deleteUserById: function (id) {
+        return axios.delete(`/api/users/${id}`)
     }
 };
