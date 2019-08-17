@@ -14,7 +14,9 @@ clear:both;
 
 class Home extends Component {
 
-    state = {
+   constructor(props){
+       super(props)
+        this.state = {
         loggedIn: false,
         href: "",
         linkTitles: [],
@@ -23,7 +25,7 @@ class Home extends Component {
         article: "",
         title: "",
         linkLength: 5
-    };
+    };}
 
     componentDidMount() {
         // this.viewSavedArticles();
@@ -32,18 +34,23 @@ class Home extends Component {
 
     scrapeResource = (url) => {
         scrape(url, (result) => {
+            let links =[];
+            let linkTitles=[];
             for (let i = 0; i < this.state.linkLength; i++) {
-                this.state.links.push(result.randomLinks[i]);
+                links.push(result.randomLinks[i]);
                 if (result.randomLinks[i]) {
-                this.state.linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
+                linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
                 }
             }
             this.setState({
                 href: result.url,
+                linkTitles: linkTitles,
+                links: links,
                 image: result.image,
                 article: "",
                 title: result.title
             })
+            console.log(this.state);
         });
     }
 
