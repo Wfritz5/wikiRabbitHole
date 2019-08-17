@@ -33,7 +33,6 @@ min-width:40px;
 border:0;
 margin:2px 5% 0px 5%;
 transition: background 0.2s;
-
 &:hover{
 background: url('${searchDetail}') no-repeat;
 background-size:50%;
@@ -52,12 +51,10 @@ min-width:40px;
 border:0;
 margin:2px 0px 0px 0px;
 transition: background 0.2s;
-
 &:hover{
   background: url('${randDetail}') no-repeat;
   background-size:50%;
   }
-  
 &:focus {
     outline: 0;
 }`;
