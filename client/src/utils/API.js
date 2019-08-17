@@ -22,8 +22,8 @@ export default {
         return axios.get("/api/users/logout")
     },
     //*scrapes
-    scrape: function () {
-        return axios.get("/api/scrape");
+    scrape: function (url, linkCount) {
+        return axios.get(`/api/scrape/${url}/${linkCount}`);
     },
 
     addUrl: function (userId) {
