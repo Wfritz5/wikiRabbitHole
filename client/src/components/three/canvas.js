@@ -2,7 +2,7 @@ import React, {
     Component
 } from "react";
 import * as THREE from "three";
-import { linkSync } from "fs";
+import {wrapText} from "../../utils/wrapText";
 // const OrbitControls = require("three-orbit-controls")(THREE);
 class Canvas extends Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class Canvas extends Component {
         this.animate = this.animate.bind(this);
         this.initializeCamera = this.initializeCamera.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
-        // this.onClick = this.onClick.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.state = { width:window.innerWidth, height: window.innerHeight};
         this.renderButtons = this.renderButtons.bind(this);
         this.renderCentral = this.renderCentral.bind(this);
@@ -25,6 +25,8 @@ class Canvas extends Component {
     componentDidMount() {
         this.updateDimensions();
         window.addEventListener("resize", this.updateDimensions.bind(this));
+        window.addEventListener( 'mousemove', this.raycast.bind(this), false );
+        window.addEventListener('click', this.onClick.bind(this));
         const width = this.state.width;
         const height = this.state.height;
         this.scene = new THREE.Scene();
@@ -35,7 +37,6 @@ class Canvas extends Component {
             alpha: true
         });
         this.raycaster = new THREE.Raycaster();
-        this.renderer.domElement.addEventListener( 'mousemove', this.raycast.bind(this), false );
         // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.renderer.setSize(width, height);
         this.mount.appendChild(this.renderer.domElement);
@@ -64,6 +65,7 @@ class Canvas extends Component {
         this.renderCentral();
         this.renderer.setSize(this.state.width, this.state.height);
         this.mount.appendChild(this.renderer.domElement);
+
     }
 
     componentWillReceiveProps(nextProps) {
@@ -75,6 +77,8 @@ class Canvas extends Component {
     componentWillUnmount() {
         cancelAnimationFrame(this.frameId);
         window.removeEventListener("resize", this.updateDimensions.bind(this));
+        window.removeEventListener("mousemove", this.raycast.bind(this));
+        window.removeEventListener("click", this.onClick.bind(this));
         this.mount.removeChild(this.renderer.domElement);
     }
 
@@ -87,16 +91,11 @@ class Canvas extends Component {
 
     raycast(e) {
         if(this.props) {  
-        var intersects = this.raycaster.intersectObjects( this.scene.children[0].children );
+        this.intersects = this.raycaster.intersectObjects( this.scene.children[0].children );
         this.raycaster.setFromCamera( this.mouse, this.camera );
-        console.log(intersects)
-        console.log(this.scene.children[0].children[0]);
-        // console.log(this.scene.children[0])
-
         for(var i = 0; i < this.scene.children[0].children.length; i++){
-            if(intersects.length){
-                if (intersects[0].object === this.scene.children[0].children[i]){ 
-                    console.log(this.scene.children[0].children[i]);
+            if(this.intersects.length){
+                if (this.intersects[0].object === this.scene.children[0].children[i]){ 
                     this.scene.children[0].children[i].material.color.setHex("0xff0000")
                 }else{            
                     this.scene.children[0].children[i].material.color.setHex("0xffffff")
@@ -106,11 +105,15 @@ class Canvas extends Component {
             }
         }}
     }
-    // onClick(e) {s
-    //     while (this.scene.children.length > 0) {
-    //         this.scene.remove(this.scene.children[0]);
-    //     }
-    // }
+    onClick(e) {
+        for(var i = 0; i < this.scene.children[0].children.length; i++){
+            if(this.intersects.length){
+                if (this.intersects[0].object === this.scene.children[0].children[i]){                     
+                    this.props.scrape("https://en."+this.scene.children[0].children[i].name)
+                }
+            }
+        }
+    }
 
 
     renderCentral(){
@@ -124,7 +127,7 @@ class Canvas extends Component {
             context1.fillStyle = "#686868";
             context1.textAlign = "center";
             context1.font = "bold 48px Tahoma, Geneva, sans-serif";
-            context1.fillText(title, size/2, size/2);
+            wrapText(context1, title, size/2, size/2,300,50)
             var texture1 = new THREE.Texture(canvas);
             texture1.needsUpdate = true;
             var star = new THREE.Vector3();
@@ -141,7 +144,7 @@ class Canvas extends Component {
 
             var banner = new THREE.Points(starGeometry, textMaterial);
             this.scene.add(banner);
-            banner.position.set(0,1,0);
+            banner.position.set(0,0,-3);
             console.log(`done:${this.props.state.title}`);
     }
     renderButtons() {
@@ -151,20 +154,20 @@ class Canvas extends Component {
         for (var i = 0; i < points.length; i++) {
             var starGeometry = new THREE.Geometry();
             var canvas = document.createElement("canvas");
-            var size = 1024;
+            var size = 512;
             canvas.width = size;
             canvas.height = size;
             var context1 = canvas.getContext("2d");
             context1.fillStyle = "#ffffff";
             context1.textAlign = "center";
-            context1.font = "normal 30px Tahoma, Geneva, sans-serif";
-            context1.fillText(points[i], size/2, size/2);
+            context1.font = "normal 14px Tahoma, Geneva, sans-serif";
+            wrapText(context1, points[i], size/2, size/2,300,30)
             var texture1 = new THREE.Texture(canvas);
             texture1.needsUpdate = true;
             var star = new THREE.Vector3();
-            star.x = THREE.Math.randFloatSpread(3+i);
-            star.y = THREE.Math.randFloatSpread(3+i);
-            star.z = THREE.Math.randFloatSpread(1);
+            star.x = THREE.Math.randFloatSpread(1)*(i+2);
+            star.y = THREE.Math.randFloatSpread(1)*(i+2);
+            star.z = THREE.Math.randFloatSpread(2);
             starGeometry.vertices.push(star);
             var textMaterial = new THREE.PointsMaterial({
                 size: 10,
@@ -173,7 +176,7 @@ class Canvas extends Component {
                 transparent: true
             });
             var banner = new THREE.Points(starGeometry, textMaterial);
-            banner.name = points[i];
+            banner.name = hrefs[i];
             banners.add(banner);
         }
 
@@ -191,9 +194,9 @@ class Canvas extends Component {
         this.frameId = window.requestAnimationFrame(this.animate);
         this.renderer.render(this.scene, this.camera);
         this.scene.children[0].rotation.z -= 0.001;
-        this.camera.position.z = (this.mouse.x - this.mouse.y) * 0.2+5;
-        if(this.scene.children[1]){this.scene.children[1].position.z = (this.mouse.x - this.mouse.y) *.25;}
-        this.camera.rotation.y = (-this.mouse.x) * 0.02;
+        this.camera.position.z = (this.mouse.x - this.mouse.y) * 0.2+6;
+        if(this.scene.children[1]){this.scene.children[1].position.z = (this.mouse.x - this.mouse.y) *.25-3;}
+        // this.scene.children[0].rotation.y += 0.0005;
     }
 
     render() {
