@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
+import SlideNav from "../../components/SlideNav.js";
 import Canvas from "../../components/three/canvas.js";
 import scrape from "../../utils/scrape";
 import styled from "styled-components";
@@ -77,6 +78,7 @@ class Home extends Component {
                     <Button color="warning" block>View Saved Articles</Button>
                 ) : (<></>)}
                 <SearchForm scrape={(url) => this.scrapeResource(url)} />
+                <SlideNav></SlideNav>
                 <Canvas state={this.state} scrape={(url) => this.scrapeResource(url)} />
             </Container >
         );
