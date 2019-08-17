@@ -8,28 +8,36 @@ export default class SlideNav extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {}
-
+        this.state = {
+            navClass: "closed",
+            displayClass: "visible"
+        }
         this.mySidenav = React.createRef()
         this.main = React.createRef()
+        this.openNav = this.openNav.bind(this);
+        this.closeNav = this.closeNav.bind(this)
     }
 
     openNav() {
-        this.mySidenav.current.style.width = "250px";
-        this.main.current.style.marginLeft = "250px";
+        this.setState({
+            navClass: "open",
+            displayClass: "hidden"
+        })
         console.log('open');
     }
 
     closeNav() {
-        this.mySidenav.current.style.width = "0";
-        this.main.current.style.marginLeft = "0";
+        this.setState({
+            navClass: "closed",
+            displayClass: "visible"
+        })
         console.log('closed');
     }
 
     render() {
         return (
             <div className="wrapper">
-                <div id="mySidenav" ref={this.mySidenav} className="sidenav">
+                <div id="mySidenav" ref={this.mySidenav} className={`sidenav ${this.state.navClass}`}>
                     <button
                         className="closebtn"
                         onClick={this.closeNav}>&times;
@@ -41,11 +49,11 @@ export default class SlideNav extends Component {
                 </div>
 
                 <div id="main" ref={this.main}>
-                    <button
+                    <button className={this.state.displayClass}
                         onClick={this.openNav}>&#9776;
               </button>
                 </div>
-            </div>
+            </div >
         );
     }
 }
