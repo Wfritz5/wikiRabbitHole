@@ -21,6 +21,7 @@ const raburlSeed = [{
         summary: "Global warming run amok",
         urlString: "https://en.wikipedia.org/wiki/Dagobah",
         image: "https://en.wikipedia.org/wiki/File:Dagobah.jpg",
+        userId: null,
         keyWords: ["yoda", "pandemic", "mountains", "Ignis"]
     },
     {
@@ -28,6 +29,7 @@ const raburlSeed = [{
         summary: "Dico tibi verum libertas optima rerum nunqual servili sub nexu vivito fili",
         urlString: "https://en.wikipedia.org/wiki/William_Wallace",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Wallace_Monument_20080505_Stained_glass_William_Wallace.jpg/220px-Wallace_Monument_20080505_Stained_glass_William_Wallace.jpg",
+        userId: null,
         keyWords: ["green", "Scotland", "Sterling Bridge"]
     },
     {
@@ -35,6 +37,7 @@ const raburlSeed = [{
         summary: "The Regalia can be yours",
         urlString: "https://en.wikipedia.org/wiki/Noctis_Lucis_Caelum",
         image: "http://vignette3.wikia.nocookie.net/finalfantasy/images/c/c9/FFXV_Regalia_Leviathan.jpg/revision/latest?cb=20160404171134",
+        userId: null,
         keyWords: ["Noctis", "Gladio", "Prompto", "Ignis"]
     }
 ];
@@ -57,6 +60,25 @@ insertUser = function(idObj) {
         idObj[2].userId = userData.ops[0]._id;
         console.log(userData.result.n + " records inserted!");
         console.log(userData);
+    })
+    .then( () =>  {
+        console.log( "idObj[0]._id: ", idObj[0]._id);
+        console.log("userId to insert there: ", idObj[0].userId)
+        const filter = { _id: idObj[0]._id };
+        const update = { userId: idObj[0].userId };
+        db.RabUrl.findByIdAndUpdate(idObj[0]._id, update);
+           
+            
+    })
+    .then( () =>  {
+        const filter = { _id: idObj[1]._id };
+        const update = { userId: idObj[1].userId };
+        db.RabUrl.findByIdAndUpdate(idObj[1]._id, update);
+    })
+    .then( () =>  {
+        const filter = { _id: idObj[2]._id };
+        const update = { userId: idObj[2].userId };
+        db.RabUrl.collection.findOneAndUpdate(filter, update);
         process.exit(0);
     })
     .catch(err => {
@@ -80,7 +102,7 @@ db.RabUrl
                         console.log(data.insertedIds[idx]);
                     }
                     //console.log(data.insertedIds);
-                    insertUser(data.insertedIds, data.insertedCount);
+                    insertUser(data.insertedIds);
                 })
             
         .catch(err => {
