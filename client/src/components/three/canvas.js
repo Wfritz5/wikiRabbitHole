@@ -126,8 +126,8 @@ class Canvas extends Component {
             var context1 = canvas.getContext("2d");
             context1.fillStyle = "#686868";
             context1.textAlign = "center";
-            context1.font = "bold 48px Tahoma, Geneva, sans-serif";
-            wrapText(context1, title, size/2, size/2,300,50)
+            context1.font = "bold 60px Tahoma, Geneva, sans-serif";
+            wrapText(context1, title, size/2, size/2,300,65)
             var texture1 = new THREE.Texture(canvas);
             texture1.needsUpdate = true;
             var star = new THREE.Vector3();
@@ -160,14 +160,14 @@ class Canvas extends Component {
             var context1 = canvas.getContext("2d");
             context1.fillStyle = "#ffffff";
             context1.textAlign = "center";
-            context1.font = "normal 36px Tahoma, Geneva, sans-serif";
-            wrapText(context1, points[i], size/2, size/2,300,30)
+            context1.font = "normal 38px Tahoma, Geneva, sans-serif";
+            wrapText(context1, points[i], size/2, size/2,300,45)
             var texture1 = new THREE.Texture(canvas);
             texture1.needsUpdate = true;
             var star = new THREE.Vector3();
             star.x = THREE.Math.randFloatSpread(10);
             star.y = THREE.Math.randFloatSpread(10);
-            star.z = THREE.Math.randFloatSpread(2);
+            // star.z = THREE.Math.randFloatSpread(2);
             if(star.y<0 && star.y>-1){
                 star.y-=1
             }
