@@ -98,6 +98,11 @@ body {
 #summary {
     width: 30%;
     margin-top: 1em;
+    line-height: 1.5em;
+}
+
+#favorite {
+    font-size: 1.2em;
 }
 
 @media screen and (max-height: 450px) {

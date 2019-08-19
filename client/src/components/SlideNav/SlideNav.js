@@ -50,13 +50,14 @@ export default class SlideNav extends Component {
               </button>
                     <article>
                         <img src={this.props.state.image} alt={this.state.title} />
-                        <p onClick={this.handleFavorite()}>{this.props.state.article ? "\u269d add to favorites" : ""}</p>
+                        <p id="favorite" onClick={this.handleFavorite()}>{this.props.state.article ? "\u269d add to favorites" : ""}</p>
                         <p id="summary">{this.props.state.article}</p>
                     </article>
+                    <div id="user-profile">
 
 
 
-
+                    </div>
                 </div>
 
                 <div id="main" ref={this.main}>
