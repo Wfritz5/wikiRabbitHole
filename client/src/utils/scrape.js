@@ -46,7 +46,7 @@ export default async function scrape(url, cb) {
       //   console.log(response)
       //   $(".tile-wrap").each(function (i, element) {
       //     result.image = $(this).find(".tile--img__img").attr("src");
-      console.log("result")
+      console.log(result)
       //     console.log(result.image)
       cb(result);
       //   });
