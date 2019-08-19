@@ -26,8 +26,8 @@ export default {
         return axios.get(`/api/scrape/${url}/${linkCount}`);
     },
 
-    addUrl: function (userId) {
-        return axios.post(`/api/rabUrl/${userId}`)
+    addUrl: function (userId, req) {
+        return axios.post(`/api/rabUrl/${userId}`, req)
     },
 
     getUrl: function (id) {
@@ -47,10 +47,10 @@ export default {
     findUrlBySingleUserKeyWord: function (userId, word) {
         return axios.get(`/api/rabUrl/keyWord/${userId}/${word}`)
     },
-    getUserByName: function (name){
+    getUserByName: function (name) {
         return axios.get(`/api/users/username/${name}`)
     },
-    getUserById: function (id){
+    getUserById: function (id) {
         return axios.get(`/api/users/${id}`)
     },
     updateUserById: function (id) {
