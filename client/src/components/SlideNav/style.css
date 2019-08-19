@@ -4,7 +4,7 @@ body {
 
 .wrapper {
     display: inline-block;
-    position: absolute;
+    position: relative;
     z-index: 1000;
 }
 
@@ -17,7 +17,7 @@ body {
 }
 
 .sidenav {
-    top: 120px;
+    top: 15%;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -43,6 +43,16 @@ body {
 
 .sidenav button:hover {
     color: rgb(255, 138, 138);
+}
+
+.sidenav img {
+    width: 10%;
+    height: auto;
+
+}
+
+.sidenav article {
+    margin: 1.5em;
 }
 
 .sidenav .closebtn {
@@ -83,6 +93,11 @@ body {
 
 #main button:hover {
     cursor: pointer;
+}
+
+#summary {
+    width: 30%;
+    margin-top: 1em;
 }
 
 @media screen and (max-height: 450px) {

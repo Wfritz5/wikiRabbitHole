@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import API from "../../utils/API";
+import API from "../../utils/API";
 import "./style.css";
 // import styled from "styled-components";
 
@@ -16,6 +16,8 @@ export default class SlideNav extends Component {
         this.main = React.createRef()
         this.openNav = this.openNav.bind(this);
         this.closeNav = this.closeNav.bind(this)
+        this.handleFavorite = this.handleFavorite.bind(this)
+
     }
 
     openNav() {
@@ -34,6 +36,10 @@ export default class SlideNav extends Component {
         console.log('closed');
     }
 
+    handleFavorite(){
+        API.addUrl(this.props.state.href,)
+    }
+
     render() {
         return (
             <div className="wrapper">
@@ -42,10 +48,15 @@ export default class SlideNav extends Component {
                         className="closebtn"
                         onClick={this.closeNav}>&times;
               </button>
-                    {/* <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Clients</a>
-                    <a href="#">Contact</a> */}
+                    <article>
+                        <img src={this.props.state.image} alt={this.state.title} />
+                        <p onClick={this.handleFavorite()}>{this.props.state.article ? "\u269d add to favorites" : ""}</p>
+                        <p id="summary">{this.props.state.article}</p>
+                    </article>
+
+
+
+
                 </div>
 
                 <div id="main" ref={this.main}>

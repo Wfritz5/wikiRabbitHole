@@ -49,7 +49,7 @@ class Home extends Component {
                 linkTitles: linkTitles,
                 links: links,
                 image: result.image,
-                article: "",
+                article: result.summary,
                 title: result.title
             })
             console.log(this.state);
@@ -79,7 +79,7 @@ class Home extends Component {
                     <Button color="warning" block>View Saved Articles</Button>
                 ) : (<></>)}
                 <SearchForm scrape={(url) => this.scrapeResource(url)} />
-                <SlideNav></SlideNav>
+                <SlideNav state={this.state}></SlideNav>
                 <Canvas state={this.state} scrape={(url) => this.scrapeResource(url)} />
             </Container >
         );
