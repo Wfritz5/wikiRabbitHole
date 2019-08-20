@@ -18,11 +18,11 @@ const userController = require("../../controllers/userController");
 //     .get(userController.findById)
 
 
- router.route("/:id")
-     .get(userController.findById)
+router.route("/:id") 
      .put(userController.update)
      .delete(userController.remove);
-
+router.route("byid/:id")
+     .get(userController.findById)
 
 router.post("/login", passport.authenticate("local", {
     failureRedirect: "/api/users/unauthorized",
