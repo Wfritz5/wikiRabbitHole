@@ -51,7 +51,7 @@ export default {
         return axios.get(`/api/users/username/${name}`)
     },
     getUserById: function (id) {
-        return axios.get(`/api/users/${id}`)
+        return axios.get(`/api/users/byid/${id}`)
     },
     updateUserById: function (id) {
         return axios.put(`/api/users/${id}`)
