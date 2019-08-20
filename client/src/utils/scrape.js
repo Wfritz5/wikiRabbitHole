@@ -10,7 +10,7 @@ export default async function scrape(url, cb) {
     const $ = cheerio.load(response.data);
     $(".mw-body").each(function (i, element) {
       result.title = $(this).children("h1#firstHeading").text();
-      result.summary = $(this).find("p").text().slice(0, 150);
+      result.summary = `${$(this).find("p").text().slice(0,300).replace(/ *\[[^\]]*]/, '')}...`;
       result.image = $(this).find(".image").attr("href");
       const links = $(this).find("a");
       result.url = `https://wikipedia.org/wiki/${result.title.replace(/ /g, "_")}`;
