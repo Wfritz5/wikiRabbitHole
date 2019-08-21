@@ -94,8 +94,6 @@ z-index:1000;`
 class SearchForm extends Component {
     constructor(props) {
         super();
-        this.random = this.random.bind(this);
-        this.search = this.search.bind(this);
     }
     state = {
         term: ""
@@ -139,10 +137,10 @@ class SearchForm extends Component {
                     <Random id={"random-search"}
                         label={"Random"}
                         onClick={
-                            (e) => { this.random(e) }}
-                        type={"submit"} />
+                            (e) => { this.random(e) }}/>
                     <Search onClick={
-                        (e) => { this.search(e, this.state.term) }} />
+                        (e) => { this.search(e, this.state.term) }}
+                        type={"submit"}  />
                 </Form>
             </Container>
         );
