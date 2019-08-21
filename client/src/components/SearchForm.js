@@ -8,7 +8,7 @@ import searchDetail from "../assets/search_detail.svg"
 import randButton from "../assets/random.svg";
 import randDetail from "../assets/random_detail.svg";
 
-const Input = styled.input`
+const Input = styled.input `
 border: 1px solid white;
 padding:5px 10px;
 border-radius: 15px;
@@ -24,7 +24,7 @@ margin:0px 5% 0px 5%;
 }
 `;
 
-const Search = styled.button`
+const Search = styled.button `
 background: url('${searchButton}') no-repeat;
 background-size:cover;
 background-size:contain;
@@ -43,7 +43,7 @@ background-size:50%;
 }
 `;
 
-const Random = styled.button`
+const Random = styled.button `
 background: url('${randButton}') no-repeat;
 background-size:contain;
 min-height:40px;
@@ -59,7 +59,7 @@ transition: background 0.2s;
     outline: 0;
 }`;
 
-const Form = styled.form`
+const Form = styled.form `
 display:flex;
 border: none;
 border-radius: 3px;
@@ -69,7 +69,7 @@ align-content:center;
 justify-content:center;
 `
 
-const Clear = styled.button`
+const Clear = styled.button `
 background-color:#000000;
 color:#DCDCDC;
 border: 1px solid white;
@@ -83,12 +83,13 @@ margin:0px 0px 2px 5%;
 }`;
 
 
-const Container = styled.div`
+const Container = styled.div `
 position:relative;
 width: 100%;
 align-content: center;
 justify-content: center;
 display: flex;
+margin-top:5em;
 z-index:1000;`
 
 class SearchForm extends Component {
@@ -119,30 +120,64 @@ class SearchForm extends Component {
     }
 
     render() {
-        return (
-            <Container>
-                <Form id="wiki-form"
-                    onSubmit={event => event.preventDefault()}>
-                    <Clear id={"clear-search"}
-                        label={"Clear"}
-                        onClick={() => this.setState({ term: "" })}
-                        type={"reset"}> clear </Clear>
+        return ( <
+            Container >
+            <
+            Form id = "wiki-form"
+            onSubmit = {
+                event => event.preventDefault()
+            } >
+            <
+            Clear id = {
+                "clear-search"
+            }
+            label = {
+                "Clear"
+            }
+            onClick = {
+                () => this.setState({
+                    term: ""
+                })
+            }
+            type = {
+                "reset"
+            } > clear < /Clear>
 
-                    <Input type="text"
-                        name="wikiSearch"
-                        id="wikiSearch"
-                        placeholder=". . ."
-                        value={this.state.term}
-                        onChange={this.handleInputChange} />
-                    <Random id={"random-search"}
-                        label={"Random"}
-                        onClick={
-                            (e) => { this.random(e) }}/>
-                    <Search onClick={
-                        (e) => { this.search(e, this.state.term) }}
-                        type={"submit"}  />
-                </Form>
-            </Container>
+            <
+            Input type = "text"
+            name = "wikiSearch"
+            id = "wikiSearch"
+            placeholder = ". . ."
+            value = {
+                this.state.term
+            }
+            onChange = {
+                this.handleInputChange
+            }
+            /> <
+            Random id = {
+                "random-search"
+            }
+            label = {
+                "Random"
+            }
+            onClick = {
+                (e) => {
+                    this.random(e)
+                }
+            }
+            /> <
+            Search onClick = {
+                (e) => {
+                    this.search(e, this.state.term)
+                }
+            }
+            type = {
+                "submit"
+            }
+            /> <
+            /Form> <
+            /Container>
         );
     }
 }

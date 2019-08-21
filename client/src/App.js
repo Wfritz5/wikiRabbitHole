@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./App.css";
 import styled from "styled-components";
 
 
@@ -16,7 +15,12 @@ display: grid;
 grid-template-rows: 1fr 9fr;
 width:100vw;
 height:100vh;
+max-width:100%;
+max-height:100%;
 background-color:#111111;
+button:focus {
+  outline: 0;
+}
 `;
 
 class App extends Component {
