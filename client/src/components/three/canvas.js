@@ -30,7 +30,9 @@ class Canvas extends Component {
         this.updateDimensions();
         window.addEventListener("resize", this.updateDimensions.bind(this));
         window.addEventListener('mousemove', this.raycast.bind(this), false);
+        window.addEventListener('touchmove', this.raycast.bind(this), false);
         window.addEventListener('click', this.onClick.bind(this));
+        window.addEventListener('ontouch', this.onClick.bind(this));
         const width = this.state.width;
         const height = this.state.height;
         this.scene = new THREE.Scene();
@@ -82,7 +84,9 @@ class Canvas extends Component {
         cancelAnimationFrame(this.frameId);
         window.removeEventListener("resize", this.updateDimensions.bind(this));
         window.removeEventListener("mousemove", this.raycast.bind(this));
+        window.removeEventListener("touchmove", this.raycast.bind(this));
         window.removeEventListener("click", this.onClick.bind(this));
+        window.removeEventListener("ontouch", this.onClick.bind(this));
         this.mount.removeChild(this.renderer.domElement);
     }
 
@@ -219,18 +223,30 @@ class Canvas extends Component {
     }
 
     render() {
-        return ( <div>
-                    <div onMouseMove = {this.onMouseMove}
-                    id = "boardCanvas"
-                    style = {{
-                            bottom: 0,
-                            position: "absolute",
-                            width: "100vw",
-                            height: "100vh",
-                            zIndex: 0
-                        }}
-                    ref = {mount => {this.mount = mount;}}/> 
-                </div>
+        return ( < div >
+            <
+            div onMouseMove = {
+                this.onMouseMove
+            }
+            id = "boardCanvas"
+            style = {
+                {
+                    top: 0,
+                    position: "absolute",
+                    width: "100vw",
+                    height: "100vh",
+                    maxHeight: "100%",
+                    maxWidth: "100%",
+                    zIndex: 0
+                }
+            }
+            ref = {
+                mount => {
+                    this.mount = mount;
+                }
+            }
+            />  < /
+            div >
         );
     }
 }

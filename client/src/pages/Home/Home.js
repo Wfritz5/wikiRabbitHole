@@ -13,9 +13,11 @@ import scrape from "../../utils/scrape";
 import styled from "styled-components";
 
 const Container = styled.div `
-position:relative;
+position:absolute;
 width:100%;
+height:100%;
 clear:both;
+overflow:hidden;
 `;
 
 class Home extends Component {
@@ -109,13 +111,34 @@ class Home extends Component {
     // viewSavedArticles = () => {}
 
     render() {
-        return ( 
-            <Container className = "homeBox" >
-                <SearchForm scrape = {this.scrapeResource}/> 
-                <SlideNav state = {this.state} addFavorite={this.addFavorite}></SlideNav> 
-                <Canvas state = {this.state} scrape = {this.scrapeResource}/> 
-                <Map store = {this.state.rabbitHole} update= {this.updateState}/>
-            </Container>    
+        return ( <
+            Container className = "homeBox" >
+            <
+            SearchForm scrape = {
+                this.scrapeResource
+            }
+            />  <
+            SlideNav state = {
+                this.state
+            }
+            addFavorite = {
+                this.addFavorite
+            } > < /SlideNav>  <
+            Canvas state = {
+                this.state
+            }
+            scrape = {
+                this.scrapeResource
+            }
+            />  <
+            Map store = {
+                this.state.rabbitHole
+            }
+            update = {
+                this.updateState
+            }
+            /> < /
+            Container >
         );
     }
 }

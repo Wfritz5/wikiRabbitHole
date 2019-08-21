@@ -57,7 +57,7 @@ export default class SlideNav extends Component {
 
                 <div id="main" ref={this.main}>
                     <button className={this.state.displayClass}
-                        onClick={this.openNav}>. . .see more
+                        onClick={this.openNav}>. . . see more
               </button>
                 </div>
             </div >
