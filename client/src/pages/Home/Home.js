@@ -8,6 +8,7 @@ import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
 import SlideNav from "../../components/SlideNav";
 import Canvas from "../../components/three/canvas.js";
+import Map from "../../components/Map.js";
 import scrape from "../../utils/scrape";
 import styled from "styled-components";
 
@@ -33,7 +34,8 @@ class Home extends Component {
             username: null,
             favorites: [],
             userId: null,
-            tags: []
+            tags: [],
+            rabbitHole: []
         };
     }
 
@@ -61,6 +63,10 @@ class Home extends Component {
 
     addTags = () => {
 
+    }
+
+    updateState = (stateIndex) => {
+        this.setState(this.state.rabbitHole[stateIndex]);
     }
 
     addFavorite = () => {
@@ -91,7 +97,8 @@ class Home extends Component {
                 links: links,
                 image: result.image,
                 article: result.summary,
-                title: result.title
+                title: result.title,
+                rabbitHole: [...this.state.rabbitHole, this.state]
             })
             console.log(this.state);
         });
@@ -104,9 +111,10 @@ class Home extends Component {
     render() {
         return ( 
             <Container className = "homeBox" >
-                <SearchForm scrape = {(url) => this.scrapeResource(url)}/> 
-                <SlideNav state = {this.state} addFavorite={() => this.addFavorite()}></SlideNav> 
-                <Canvas state = {this.state} scrape = {(url) => this.scrapeResource(url)}/> 
+                <SearchForm scrape = {this.scrapeResource}/> 
+                <SlideNav state = {this.state} addFavorite={this.addFavorite}></SlideNav> 
+                <Canvas state = {this.state} scrape = {this.scrapeResource}/> 
+                <Map store = {this.state.rabbitHole} update= {this.updateState}/>
             </Container>    
         );
     }

@@ -6,6 +6,7 @@ body {
     display: inline-block;
     position: relative;
     z-index: 1000;
+    width: 100%;
 }
 
 .open {
@@ -46,8 +47,8 @@ body {
 }
 
 .sidenav img {
-    width: 70%;
-    height: auto;
+    height: 50%;
+    width: auto;
 
 }
 
@@ -72,14 +73,19 @@ body {
 #main button {
     border: none;
     position: fixed;
-    top: 63px;
-    left: 20px;
+    bottom: 0;
+    right: 0;
     display: inline-block;
     font-size: 30px;
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0);
-    color: rgb(255, 138, 138);
+    color: rgb(255, 255, 255);
 
+}
+
+#main button:hover {
+    cursor: pointer;
+    color: rgb(255, 138, 138)
 }
 
 .hidden {
@@ -94,9 +100,7 @@ body {
     transition: visibility 0s linear 0s, opacity 300ms;
 }
 
-#main button:hover {
-    cursor: pointer;
-}
+
 
 #summary {
     width: 100%;
@@ -114,6 +118,10 @@ body {
     float: right;
     margin: 2% 5% 2% 5%;
     width: 40%;
+}
+
+#user-profile h2 {
+    font-size: 1.2em;
 }
 
 @media screen and (max-height: 450px) {
