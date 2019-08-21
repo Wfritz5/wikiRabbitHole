@@ -65,6 +65,10 @@ class Home extends Component {
 
     }
 
+    updateState = (stateIndex) => {
+        this.setState(this.state.rabbitHole[stateIndex]);
+    }
+
     addFavorite = () => {
         let req = {
             title: this.state.title,
@@ -110,7 +114,7 @@ class Home extends Component {
                 <SearchForm scrape = {this.scrapeResource}/> 
                 <SlideNav state = {this.state} addFavorite={this.addFavorite}></SlideNav> 
                 <Canvas state = {this.state} scrape = {this.scrapeResource}/> 
-                <Map store = {this.state.rabbitHole}/>
+                <Map store = {this.state.rabbitHole} update= {this.updateState}/>
             </Container>    
         );
     }
