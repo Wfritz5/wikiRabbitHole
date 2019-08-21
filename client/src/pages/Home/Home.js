@@ -8,6 +8,7 @@ import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
 import SlideNav from "../../components/SlideNav";
 import Canvas from "../../components/three/canvas.js";
+import Map from "../../components/Map.js";
 import scrape from "../../utils/scrape";
 import styled from "styled-components";
 
@@ -109,6 +110,7 @@ class Home extends Component {
                 <SearchForm scrape = {this.scrapeResource}/> 
                 <SlideNav state = {this.state} addFavorite={this.addFavorite}></SlideNav> 
                 <Canvas state = {this.state} scrape = {this.scrapeResource}/> 
+                <Map store = {this.state.rabbitHole}/>
             </Container>    
         );
     }
