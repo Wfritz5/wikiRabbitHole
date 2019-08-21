@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import API from "../../utils/API";
 import "./style.css";
 // import styled from "styled-components";
 
@@ -15,9 +14,7 @@ export default class SlideNav extends Component {
         this.mySidenav = React.createRef()
         this.main = React.createRef()
         this.openNav = this.openNav.bind(this);
-        this.closeNav = this.closeNav.bind(this)
-        this.handleFavorite = this.handleFavorite.bind(this)
-
+        this.closeNav = this.closeNav.bind(this);
     }
 
     openNav() {
@@ -36,9 +33,7 @@ export default class SlideNav extends Component {
         console.log('closed');
     }
 
-    handleFavorite(){
-        API.addUrl(this.props.state.href,)
-    }
+
 
     render() {
         return (
@@ -47,16 +42,16 @@ export default class SlideNav extends Component {
                     <button
                         className="closebtn"
                         onClick={this.closeNav}>&times;
-              </button>
+                    </button>
                     <article>
                         <img src={this.props.state.image} alt={this.state.title} />
-                        <p id="favorite" onClick={this.handleFavorite()}>{this.props.state.article ? "\u269d add to favorites" : ""}</p>
                         <p id="summary">{this.props.state.article}</p>
+                        <p id="favorite" onClick={this.props.addFavorite}>{this.props.state.article ? "\u269d add to favorites" : ""}</p>
+
                     </article>
                     <div id="user-profile">
-
-
-
+                        <h2>{this.props.state.username}</h2>
+                        <h3>{this.props.state.favorites}</h3>
                     </div>
                 </div>
 
