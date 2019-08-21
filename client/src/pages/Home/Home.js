@@ -76,7 +76,7 @@ class Home extends Component {
     }
 
     scrapeResource = (url) => {
-        scrape(url, (result) => {
+        scrape(url, this.state.linkLength, (result) => {
             let links = [];
             let linkTitles = [];
             for (let i = 0; i < this.state.linkLength; i++) {
