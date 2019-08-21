@@ -1,5 +1,9 @@
-import React, { Component } from "react";
-import { Button } from "reactstrap";
+import React, {
+    Component
+} from "react";
+import {
+    Button
+} from "reactstrap";
 import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
 import SlideNav from "../../components/SlideNav";
@@ -7,7 +11,7 @@ import Canvas from "../../components/three/canvas.js";
 import scrape from "../../utils/scrape";
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled.div `
 position:relative;
 width:100%;
 clear:both;
@@ -25,13 +29,50 @@ class Home extends Component {
             image: "",
             article: "",
             title: "",
-            linkLength: 5
+            linkLength: 5,
+            username: null,
+            favorites: [],
+            userId: null,
+            tags: []
         };
     }
 
     componentDidMount() {
         // this.viewSavedArticles();
         this.loggedIn();
+    }
+
+
+    loggedIn = () => {
+        API.isLoggedIn().then(user => {
+            console.log(user);
+            if (user.data.loggedIn) {
+                this.setState({
+                    loggedIn: true,
+                    username: user.data.user.username,
+                    favorites: user.data.user.rabUrl,
+                    userId: user.data.user._id
+                });
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    addTags = () => {
+
+    }
+
+    addFavorite = () => {
+        let req = {
+            title: this.state.title,
+            summary: this.state.summary,
+            urlString: this.state.href,
+            image: this.state.image,
+            userId: this.state.userId,
+            keywords: this.state.tags
+        };
+        API.addUrl(this.state.userId, req);
     }
 
     scrapeResource = (url) => {
@@ -60,28 +101,13 @@ class Home extends Component {
 
     // viewSavedArticles = () => {}
 
-    loggedIn = () => {
-        API.isLoggedIn().then(user => {
-            if (user.data.loggedIn) {
-                this.setState({
-                    loggedIn: true
-                });
-            }
-        }).catch(err => {
-            console.log(err);
-        });
-    }
-
     render() {
-        return (
-            <Container className="homeBox">
-                {this.state.loggedIn ? (
-                    <Button color="warning" block>View Saved Articles</Button>
-                ) : (<></>)}
-                <SearchForm scrape={(url) => this.scrapeResource(url)} />
-                <SlideNav state={this.state}></SlideNav>
-                <Canvas state={this.state} scrape={(url) => this.scrapeResource(url)} />
-            </Container >
+        return ( 
+            <Container className = "homeBox" >
+                <SearchForm scrape = {(url) => this.scrapeResource(url)}/> 
+                <SlideNav state = {this.state} addFavorite={() => this.addFavorite()}></SlideNav> 
+                <Canvas state = {this.state} scrape = {(url) => this.scrapeResource(url)}/> 
+            </Container>    
         );
     }
 }
