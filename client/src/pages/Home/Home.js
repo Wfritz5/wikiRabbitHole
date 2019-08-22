@@ -5,6 +5,7 @@ import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
 import SlideNav from "../../components/SlideNav";
 import Canvas from "../../components/three/canvas.js";
+import Range from "../../components/Range.js";
 import Map from "../../components/Map.js";
 import scrape from "../../utils/scrape";
 import styled from "styled-components";
@@ -72,6 +73,13 @@ class Home extends Component {
         this.setState(this.state.rabbitHole[stateIndex]);
     }
 
+    updateLinkLength = (e) => {
+        let val =e.target.value;
+        this.setState({
+            linkLength: val
+        })
+    }
+
     addFavorite = () => {
         let req = {
             title: this.state.title,
@@ -120,7 +128,8 @@ class Home extends Component {
         return ( 
             <Container className = "homeBox" >
                 <SearchForm scrape = {this.scrapeResource}/>  
-                <SlideNav state = {this.state} addFavorite = {this.addFavorite} /> 
+                <SlideNav state = {this.state} addFavorite = {this.addFavorite} />
+                <Range update ={this.updateLinkLength}/>
                 <Canvas state = {this.state} scrape = {this.scrapeResource}/>  
                 <Map store = {this.state.rabbitHole} update = {this.updateState}/> 
             </Container>
