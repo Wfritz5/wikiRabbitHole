@@ -8,11 +8,11 @@ export default async function scrape(url, linkCount, cb) {
     validateStatus: function (status) {
       return status < 500;
     }
-    // headers: {
-    //   'Access-Control-Allow-Origin': "*",
-    //   'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-    //   'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept"
-    // }
+    headers: {
+      'Access-Control-Allow-Origin': "*",
+      'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept"
+    }
   }).then(response => {
     const result = {};
     const linkArr = [];
