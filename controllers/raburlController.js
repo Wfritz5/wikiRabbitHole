@@ -12,13 +12,16 @@ module.exports = {
     create: function (req, res) {
         db.RabUrl
             .create(req.body)
-            .then(console.log(dbModel))
-            .then(db.Users.findOneAndUpdate(
+            // .then(console.log(dbModel))
+            .then(dbModel => {
+                console.log(dbModel);
+                db.User.findOneAndUpdate(
                 { _id: req.params.userId },
-                { $push: { rabUrl: dbModel._id } }
-              ))
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+                { $push: { rabUrl: dbModel._id } } ) 
+                .then(dbModel => res.json(dbModel))
+                .catch(err => res.status(422).json(err));
+            })
+           
     },
     update: function (req, res) {
         db.RabUrl
