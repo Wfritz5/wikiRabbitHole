@@ -12,4 +12,4 @@ router.route("/:theUrl/:linkCount")
     .get(scrapeController.grabScrape);
 
 
-module.export = router; 
+module.exports = router; 

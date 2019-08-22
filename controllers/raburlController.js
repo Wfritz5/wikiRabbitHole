@@ -13,7 +13,7 @@ module.exports = {
         db.RabUrl
             .create(req.body)
             .then(console.log(dbModel))
-            .then(db.Users.update(
+            .then(db.Users.findOneAndUpdate(
                 { _id: req.params.userId },
                 { $push: { rabUrl: dbModel._id } }
               ))
