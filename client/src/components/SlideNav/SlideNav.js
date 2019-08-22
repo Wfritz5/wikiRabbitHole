@@ -47,6 +47,7 @@ export default class SlideNav extends Component {
                        {this.props.state.loggedIn ? <p id="favorite" onClick={this.props.addFavorite}>{this.props.state.article ? "\u269d add to favorites" : ""}</p> : <></>}
 
                     </article>
+                    {this.props.state.loggedIn ? 
                     <div id="user-profile">
                         <h2>{this.props.state.username}</h2>
                         <h3>favorites</h3>
@@ -57,14 +58,17 @@ export default class SlideNav extends Component {
                             </li>
                         ))}
                         {/* <h3>{this.props.state.favorites}</h3> */}
-                    </div>
+                    </div>:
+                    <div><p style={{margin:"10vh 10vw 10vh 10vw"}}>signup or login to access and organize starred links</p></div>}
                 </div>
 
+                {this.props.state.links.length ? 
                 <div id="main" ref={this.main}>
                     <button className={this.state.displayClass}
                         onClick={this.openNav}>. . . see more
-              </button>
-                </div>
+                    </button>
+                </div>:
+                <></>}
             </div >
         );
     }
