@@ -1,9 +1,6 @@
 import React, {
     Component
 } from "react";
-import {
-    Button
-} from "reactstrap";
 import API from "../../utils/API";
 import SearchForm from "../../components/SearchForm.js";
 import SlideNav from "../../components/SlideNav";
@@ -48,20 +45,24 @@ class Home extends Component {
 
 
     loggedIn = () => {
-        API.isLoggedIn().then(user => {
-            console.log(user);
-            if (user.data.loggedIn) {
+        API.isLoggedIn().then(userData => {
+            if(userData.data.loggedIn){
+            API.getUserById(userData.data.user._id).then(user => {
                 this.setState({
                     loggedIn: true,
-                    username: user.data.user.username,
-                    favorites: user.data.user.rabUrl,
-                    userId: user.data.user._id
+                    username: user.data.username,
+                    userId: user.data._id,
+                    favorites: user.data.rabUrl
                 });
-            }
+            
         }).catch(err => {
             console.log(err);
-        });
-    }
+        })}
+            
+            
+            
+    
+    })}
 
     addTags = () => {
 
@@ -80,7 +81,13 @@ class Home extends Component {
             userId: this.state.userId,
             keywords: this.state.tags
         };
-        API.addUrl(this.state.userId, req);
+        API.addUrl(this.state.userId, req).then(result=>{
+            let newFav = JSON.parse(result.config.data);
+            this.setState({
+                favorites:[...this.state.favorites, newFav]})
+        });
+
+
     }
 
     scrapeResource = (url) => {
@@ -102,7 +109,6 @@ class Home extends Component {
                 title: result.title,
                 rabbitHole: [...this.state.rabbitHole, this.state]
             })
-            console.log(this.state);
         });
     }
 
@@ -111,34 +117,13 @@ class Home extends Component {
     // viewSavedArticles = () => {}
 
     render() {
-        return ( <
-            Container className = "homeBox" >
-            <
-            SearchForm scrape = {
-                this.scrapeResource
-            }
-            />  <
-            SlideNav state = {
-                this.state
-            }
-            addFavorite = {
-                this.addFavorite
-            } > < /SlideNav>  <
-            Canvas state = {
-                this.state
-            }
-            scrape = {
-                this.scrapeResource
-            }
-            />  <
-            Map store = {
-                this.state.rabbitHole
-            }
-            update = {
-                this.updateState
-            }
-            /> < /
-            Container >
+        return ( 
+            <Container className = "homeBox" >
+                <SearchForm scrape = {this.scrapeResource}/>  
+                <SlideNav state = {this.state} addFavorite = {this.addFavorite} /> 
+                <Canvas state = {this.state} scrape = {this.scrapeResource}/>  
+                <Map store = {this.state.rabbitHole} update = {this.updateState}/> 
+            </Container>
         );
     }
 }

@@ -154,7 +154,6 @@ class Canvas extends Component {
         var banner = new THREE.Points(starGeometry, textMaterial);
         this.scene.add(banner);
         banner.position.set(0, 0, -3);
-        console.log(`done:${this.props.state.title}`);
     }
     renderButtons = () => {
         const points = this.props.state.linkTitles;
@@ -223,30 +222,20 @@ class Canvas extends Component {
     }
 
     render() {
-        return ( < div >
-            <
-            div onMouseMove = {
-                this.onMouseMove
-            }
-            id = "boardCanvas"
-            style = {
-                {
-                    top: 0,
-                    position: "absolute",
-                    width: "100vw",
-                    height: "100vh",
-                    maxHeight: "100%",
-                    maxWidth: "100%",
-                    zIndex: 0
-                }
-            }
-            ref = {
-                mount => {
-                    this.mount = mount;
-                }
-            }
-            />  < /
-            div >
+        return (
+            <div >
+                <div onMouseMove = {this.onMouseMove}
+                id = "boardCanvas"
+                style = {{
+                        top: 0,
+                        position: "absolute",
+                        width: "100vw",
+                        height: "100vh",
+                        maxHeight: "100%",
+                        maxWidth: "100%",
+                        zIndex: 0}}
+                ref = {mount => {this.mount = mount;}}/>  
+            </div>
         );
     }
 }
