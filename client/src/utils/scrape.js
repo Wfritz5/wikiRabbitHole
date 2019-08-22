@@ -11,7 +11,7 @@ export default async function scrape(url, linkCount, cb) {
     headers: {
       'Access-Control-Allow-Origin': "*",
       'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept"
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-id, Content-Length, X-Requested-With',
     }
   }).then(response => {
     const result = {};
