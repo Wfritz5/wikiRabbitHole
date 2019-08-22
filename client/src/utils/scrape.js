@@ -4,7 +4,16 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 export default async function scrape(url, linkCount, cb) {
-  axios.get(url).then(response => {
+  axios.get(url, {
+    validateStatus: function (status) {
+      return status < 500;
+    }
+    // headers: {
+    //   'Access-Control-Allow-Origin': "*",
+    //   'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+    //   'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept"
+    // }
+  }).then(response => {
     const result = {};
     const linkArr = [];
     const $ = cheerio.load(response.data);
@@ -37,12 +46,12 @@ export default async function scrape(url, linkCount, cb) {
             console.log(result)
             cb(result);
           });
-        });
+        }).catch(err => console.log(err));
       } else {
         result.image = noImage;
         console.log(result)
         cb(result);
       }
     });
-  })
+  }).catch(err => console.log(err));
 }
