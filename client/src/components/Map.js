@@ -6,7 +6,7 @@ const Map = (props) => {
     position:fixed;
     top:15%;
     display:relative;
-    z-index:1000;
+    z-index:500;
     margin-left:1em;
     `;
     const Hole = styled.li`

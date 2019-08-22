@@ -8,7 +8,7 @@ right:1em;
 width: 1em;
 height:50%;
 margin:auto;
-z-index:1000;
+z-index:500;
 -webkit-appearance: slider-vertical;
 
 `;
