@@ -13,11 +13,9 @@ export default class SlideNav extends Component {
         }
         this.mySidenav = React.createRef()
         this.main = React.createRef()
-        this.openNav = this.openNav.bind(this);
-        this.closeNav = this.closeNav.bind(this);
     }
 
-    openNav() {
+    openNav=()=> {
         this.setState({
             navClass: "open",
             displayClass: "hidden"
@@ -25,7 +23,7 @@ export default class SlideNav extends Component {
         console.log('open');
     }
 
-    closeNav() {
+    closeNav=()=> {
         this.setState({
             navClass: "closed",
             displayClass: "visible"
@@ -46,12 +44,19 @@ export default class SlideNav extends Component {
                     <article>
                         <img src={this.props.state.image} alt={this.state.title} />
                         <p id="summary">{this.props.state.article}</p>
-                        <p id="favorite" onClick={this.props.addFavorite}>{this.props.state.article ? "\u269d add to favorites" : ""}</p>
+                       {this.props.state.loggedIn ? <p id="favorite" onClick={this.props.addFavorite}>{this.props.state.article ? "\u269d add to favorites" : ""}</p> : <></>}
 
                     </article>
                     <div id="user-profile">
                         <h2>{this.props.state.username}</h2>
-                        <h3>{this.props.state.favorites}</h3>
+                        <h3>favorites</h3>
+                        <hr />
+                        {this.props.state.favorites.map((favorite, i)=>(
+                            <li key={i}>{favorite.title}
+                            <a key={i} href={favorite.urlString}>link to wikipedia</a>
+                            </li>
+                        ))}
+                        {/* <h3>{this.props.state.favorites}</h3> */}
                     </div>
                 </div>
 
