@@ -7,7 +7,7 @@ export default async function scrape(url, linkCount, cb) {
   axios.get(url, {
     validateStatus: function (status) {
       return status < 500;
-    }
+    },
     headers: {
       'Access-Control-Allow-Origin': "*",
       'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
