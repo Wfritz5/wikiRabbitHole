@@ -15,6 +15,7 @@ export default async function scrape(url, cb) {
     }
   }).then(response => {
     const result = {};
+    if (response.status === 200) {
     const linkArr = [];
     const $ = cheerio.load(response.data);
     $(".mw-body").each(function (i, element) {
@@ -53,5 +54,14 @@ export default async function scrape(url, cb) {
         cb(result);
       }
     });
+  } else {
+    result.title = "Page not found"
+    result.image = "";
+    result.url = "";
+    result.summary = "";
+    result.randomLinks = [];
+    cb(result);
+  }
   }).catch(err => console.log(err));
+  
 }
