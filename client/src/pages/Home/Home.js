@@ -31,6 +31,7 @@ class Home extends Component {
             article: "",
             title: "",
             linkLength: 5,
+            renderedLinks: [],
             username: null,
             favorites: [],
             userId: null,
@@ -99,10 +100,10 @@ class Home extends Component {
     }
 
     scrapeResource = (url) => {
-        scrape(url, this.state.linkLength, (result) => {
+        scrape(url, (result) => {
             let links = [];
             let linkTitles = [];
-            for (let i = 0; i < this.state.linkLength; i++) {
+            for (let i = 0; i < 20; i++) {
                 links.push(result.randomLinks[i]);
                 if (result.randomLinks[i]) {
                     linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
