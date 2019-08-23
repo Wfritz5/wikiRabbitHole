@@ -61,7 +61,6 @@ body {
     margin: 2% 2% 2% 2%;
     padding-right: 2%;
     width: 40%;
-    border-right: 1px solid #000;
 
 }
 
@@ -107,6 +106,14 @@ body {
     transition: visibility 0s linear 0s, opacity 300ms;
 }
 
+.wiki {
+    display: inline-block;
+}
+
+.favorite {
+    display: inline-block;
+    margin: 0.2em;
+}
 
 
 #summary {
@@ -125,10 +132,14 @@ body {
     float: right;
     margin: 2% 5% 2% 5%;
     width: 40%;
+    padding-left: 10px;
+    border-left: 1px solid #000;
+
 }
 
 #user-profile h2 {
-    font-size: 1.2em;
+    font-size: 2em;
+    margin: 0 0 0.5em 0;
 }
 
 @media screen and (max-height: 450px) {

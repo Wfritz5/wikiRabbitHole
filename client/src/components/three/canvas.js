@@ -107,11 +107,11 @@ class Canvas extends Component {
                         this.scene.children[0].children[i].position.z=0.1;
                         this.scene.children[0].children[i].material.color.setHex("0xff0000");
                     } else {
-                        this.scene.children[0].children[i].material.color.setHex("0xffffff");
+                        this.scene.children[0].children[i].material.color.setHex("0xdddddd");
                         this.scene.children[0].children[i].position.z=0;
                     }
                 } else {
-                    this.scene.children[0].children[i].material.color.setHex("0xffffff");
+                    this.scene.children[0].children[i].material.color.setHex("0xdddddd");
                     this.scene.children[0].children[i].position.z=0;
                 }
             }
