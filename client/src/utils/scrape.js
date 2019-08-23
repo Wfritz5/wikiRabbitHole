@@ -3,7 +3,7 @@ import randomLinkGenerator from "./randomLinkGenerator"
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-export default async function scrape(url, linkCount, cb) {
+export default async function scrape(url, cb) {
   axios.get(url, {
     validateStatus: function (status) {
       return status < 500;
@@ -31,10 +31,10 @@ export default async function scrape(url, linkCount, cb) {
       const filteredLinks = linkArr.filter(link => link.includes(`/wiki/`) && !link.includes(`:`) &&
         !link.includes(`%`) && !link.includes(`#`))
       // grabs specified number of unique random numbers
-      if (filteredLinks.length < 5) {
+      if (filteredLinks.length < 20) {
         result.randomLinks = randomLinkGenerator(filteredLinks, filteredLinks.length);
       } else {
-        result.randomLinks = randomLinkGenerator(filteredLinks, linkCount);
+        result.randomLinks = randomLinkGenerator(filteredLinks, 20);
       }
       // checks for a good image and then will grab its base code
       if (result.image) {
