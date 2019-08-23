@@ -1,13 +1,13 @@
 import React, {
     Component
 } from "react";
-import API from "../../utils/API";
-import SearchForm from "../../components/SearchForm.js";
-import SlideNav from "../../components/SlideNav";
-import Canvas from "../../components/three/canvas.js";
-import Range from "../../components/Range.js";
-import Map from "../../components/Map.js";
-import scrape from "../../utils/scrape";
+import API from "../utils/API";
+import SearchForm from "../components/SearchForm.js";
+import SlideNav from "../components/SlideNav";
+import Canvas from "../components/three/canvas.js";
+import Range from "../components/Range.js";
+import Map from "../components/Map.js";
+import scrape from "../utils/scrape";
 import styled from "styled-components";
 
 const Container = styled.div `
