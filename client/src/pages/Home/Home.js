@@ -102,6 +102,11 @@ class Home extends Component {
         scrape(url, (result) => {
             let links = [];
             let linkTitles = [];
+            let shown = 0.5;
+            if(this.state.links.length){
+                let prevCount = this.state.linkLength;
+                let prevLength = this.state.links.length;
+                shown = prevCount / prevLength;}
             for (let i = 0; i < 20; i++) {
                 if (result.randomLinks[i]) {
                     links.push(result.randomLinks[i]);
@@ -112,7 +117,7 @@ class Home extends Component {
                 href: result.url,
                 linkTitles: linkTitles,
                 links: links,
-                linkLength: result.randomLinks.length,
+                linkLength:  result.randomLinks.length * shown,
                 image: result.image,
                 article: result.summary,
                 title: result.title,
