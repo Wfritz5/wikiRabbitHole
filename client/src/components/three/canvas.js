@@ -159,7 +159,7 @@ class Canvas extends Component {
         const points = this.props.state.linkTitles;
         const hrefs = this.props.state.links;
         var banners = new THREE.Group();
-        for (var i = 0; i < points.length; i++) {
+        for (var i = 0; i < this.props.state.linkLength; i++) {
             var starGeometry = new THREE.Geometry();
             var canvas = document.createElement("canvas");
             var size = 1024;
