@@ -13,9 +13,13 @@ z-index:500;
 
 `;
 const Range = (props) => {
-
+    const handleChange = (e) => {
+        props.update(e);
+        console.log(props.linkLength)
+        console.log(e.target.value)
+    }
     return (
-        <Slider type='range' min='1' max='20' orient="vertical" onChange={(e)=>props.update(e)}/>
+        <Slider type='range' min='0' defaultValue={props.linkLength/2} max={props.linkLength} orient="vertical" onChange={(e)=>handleChange(e)}/>
     );
 }
 
