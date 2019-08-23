@@ -94,9 +94,19 @@ class Home extends Component {
             this.setState({
                 favorites:[...this.state.favorites, newFav]})
         });
-
-
     }
+
+    // deleteFavorite = () => {
+    //     let req = {
+    //         id: this.state.id,
+    //         userId: this.state.userId,
+    //     };
+    //     API.deleteUrl(this.state.userId, req).then(result=>{
+    //         let newFav = JSON.parse(result.config.data);
+    //         this.setState({
+    //             favorites:[...this.state.favorites, newFav]})
+    //     });
+    // }
 
     scrapeResource = (url) => {
         scrape(url, (result) => {

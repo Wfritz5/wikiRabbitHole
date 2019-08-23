@@ -54,7 +54,10 @@ export default class SlideNav extends Component {
                         <hr />
                         {this.props.state.favorites.map((favorite, i)=>(
                             <li key={i}>{favorite.title}
-                            <a key={i} href={favorite.urlString}>link to wikipedia</a>
+                            <ul>
+                            <a key={i} href={favorite.urlString} rel="noopener noreferrer" target="_blank"> Wikipedia Link</a>
+                            <p onClick={this.props.deleteFavorite}>Delete Me</p>
+                            </ul>
                             </li>
                         ))}
                         {/* <h3>{this.props.state.favorites}</h3> */}
