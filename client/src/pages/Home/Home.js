@@ -145,7 +145,7 @@ class Home extends Component {
             <Container className = "homeBox" >
                 <SearchForm scrape = {this.scrapeResource}/>  
                 <SlideNav state = {this.state} addFavorite = {this.addFavorite} />
-                <Range update ={this.updateLinkLength} linkLength ={this.state.links.length}/>
+                {this.state.links.length ? <Range update ={this.updateLinkLength} linkLength ={this.state.links.length}/> : <></>}
                 <Canvas state = {this.state} scrape = {this.scrapeResource}/>  
                 <Map store = {this.state.rabbitHole} update = {this.updateState}/> 
             </Container>
