@@ -120,65 +120,16 @@ class SearchForm extends Component {
     }
 
     render() {
-        return ( <
-            Container >
-            <
-            Form id = "wiki-form"
-            onSubmit = {
-                event => event.preventDefault()
-            } >
-            <
-            Clear id = {
-                "clear-search"
-            }
-            label = {
-                "Clear"
-            }
-            onClick = {
-                () => this.setState({
-                    term: ""
-                })
-            }
-            type = {
-                "reset"
-            } > clear < /Clear>
-
-            <
-            Input type = "text"
-            name = "wikiSearch"
-            id = "wikiSearch"
-            placeholder = ". . ."
-            value = {
-                this.state.term
-            }
-            onChange = {
-                this.handleInputChange
-            }
-            /> <
-            Random id = {
-                "random-search"
-            }
-            label = {
-                "Random"
-            }
-            onClick = {
-                (e) => {
-                    this.random(e)
-                }
-            }
-            /> <
-            Search onClick = {
-                (e) => {
-                    this.search(e, this.state.term)
-                }
-            }
-            type = {
-                "submit"
-            }
-            /> <
-            /Form> <
-            /Container>
-        );
+        return ( 
+            <Container>
+                <Form id = "wiki-form" onSubmit = {(e) => {this.search(e, this.state.term)}}>
+                    <Clear id = {"clear-search"} label = {"Clear"} onClick = {() => this.setState({term: ""})} type = {"reset"}> clear </Clear>
+                    <Input type = "text"  name = "wikiSearch"  id = "wikiSearch" placeholder = ". . ." value = {this.state.term}  onChange = {this.handleInputChange} />
+                    <Random type='button' id = {"random-search"} label = {"Random"} onClick = {(e) => {this.random(e)}} /> 
+                    <Search type ="submit" />
+                </Form> 
+            </Container>
+                );
     }
 }
 
