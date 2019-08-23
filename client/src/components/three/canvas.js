@@ -104,12 +104,15 @@ class Canvas extends Component {
             for (var i = 0; i < this.scene.children[0].children.length; i++) {
                 if (this.intersects.length) {
                     if (this.intersects[0].object === this.scene.children[0].children[i]) {
-                        this.scene.children[0].children[i].material.color.setHex("0xff0000")
+                        this.scene.children[0].children[i].position.z=0.1;
+                        this.scene.children[0].children[i].material.color.setHex("0xff0000");
                     } else {
-                        this.scene.children[0].children[i].material.color.setHex("0xffffff")
+                        this.scene.children[0].children[i].material.color.setHex("0xdddddd");
+                        this.scene.children[0].children[i].position.z=0;
                     }
                 } else {
-                    this.scene.children[0].children[i].material.color.setHex("0xffffff")
+                    this.scene.children[0].children[i].material.color.setHex("0xdddddd");
+                    this.scene.children[0].children[i].position.z=0;
                 }
             }
         }
@@ -136,7 +139,7 @@ class Canvas extends Component {
         context1.fillStyle = "#686868";
         context1.textAlign = "center";
         context1.font = "bold 60px Tahoma, Geneva, sans-serif";
-        wrapText(context1, title, size / 2, size / 2, 300, 65)
+        wrapText(context1, title, size / 2, size / 2, 400, 65)
         var texture1 = new THREE.Texture(canvas);
         texture1.needsUpdate = true;
         var star = new THREE.Vector3();
@@ -169,7 +172,7 @@ class Canvas extends Component {
             context1.fillStyle = "#ffffff";
             context1.textAlign = "center";
             context1.font = "normal 38px Tahoma, Geneva, sans-serif";
-            wrapText(context1, points[i], size / 2, size / 2, 300, 45)
+            wrapText(context1, points[i], size / 2, size / 2, 500, 45)
             var texture1 = new THREE.Texture(canvas);
             texture1.needsUpdate = true;
             var star = new THREE.Vector3();
@@ -177,16 +180,16 @@ class Canvas extends Component {
             star.y = THREE.Math.randFloatSpread(10);
             // star.z = THREE.Math.randFloatSpread(2);
             if (star.y < 0 && star.y > -1) {
-                star.y -= 1
+                star.y -= 2
             }
             if (star.y > 0 && star.y < 1) {
-                star.y += 1
+                star.y += 2
             }
             if (star.x < 0 && star.x > -1) {
-                star.x -= -1
+                star.x -= 2
             }
             if (star.x > 0 && star.x < 1) {
-                star.x += 1
+                star.x += 2
             }
             starGeometry.vertices.push(star);
             var textMaterial = new THREE.PointsMaterial({
