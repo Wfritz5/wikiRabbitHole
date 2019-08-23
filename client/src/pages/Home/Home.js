@@ -76,7 +76,7 @@ class Home extends Component {
     updateLinkLength = (e) => {
         let val =e.target.value;
         this.setState({
-            linkLength: val
+            linkLength: val,
         })
     }
 
@@ -103,8 +103,8 @@ class Home extends Component {
             let links = [];
             let linkTitles = [];
             for (let i = 0; i < 20; i++) {
-                links.push(result.randomLinks[i]);
                 if (result.randomLinks[i]) {
+                    links.push(result.randomLinks[i]);
                     linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
                 }
             }
@@ -112,6 +112,7 @@ class Home extends Component {
                 href: result.url,
                 linkTitles: linkTitles,
                 links: links,
+                linkLength: result.randomLinks.length,
                 image: result.image,
                 article: result.summary,
                 title: result.title,
@@ -129,7 +130,7 @@ class Home extends Component {
             <Container className = "homeBox" >
                 <SearchForm scrape = {this.scrapeResource}/>  
                 <SlideNav state = {this.state} addFavorite = {this.addFavorite} />
-                <Range update ={this.updateLinkLength}/>
+                <Range update ={this.updateLinkLength} linkLength ={this.state.links.length}/>
                 <Canvas state = {this.state} scrape = {this.scrapeResource}/>  
                 <Map store = {this.state.rabbitHole} update = {this.updateState}/> 
             </Container>
