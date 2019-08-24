@@ -24,16 +24,6 @@ button:focus {
 `;
 
 class App extends Component {
-
-  handleSubmit = event => {
-    event.preventDefault();
-    // const url = `https://en.wikipedia.org/wiki/${this.state.term}`
-    // alert(`The url is ` + url)
-    // window.open(url)
-    // this.setState({ term: ""})
-    alert("random")
-  };
-
   render() {
     return (
       <Container>
