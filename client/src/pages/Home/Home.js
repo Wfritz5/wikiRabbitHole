@@ -59,10 +59,6 @@ class Home extends Component {
         }).catch(err => {
             console.log(err);
         })}
-            
-            
-            
-    
     })}
 
     addTags = () => {
@@ -96,17 +92,19 @@ class Home extends Component {
         });
     }
 
-    // deleteFavorite = () => {
-    //     let req = {
-    //         id: this.state.id,
-    //         userId: this.state.userId,
-    //     };
-    //     API.deleteUrl(this.state.userId, req).then(result=>{
-    //         let newFav = JSON.parse(result.config.data);
-    //         this.setState({
-    //             favorites:[...this.state.favorites, newFav]})
-    //     });
-    // }
+    deleteFavorite = (e) => {
+        let id = e.target.dataset.rabid;
+        API.deleteUrl(id).then(result=>{
+            API.getUserById(this.state.userId).then(user => {
+                this.setState({
+                    favorites: user.data.rabUrl
+                });
+            
+        }).catch(err => {
+            console.log(err);
+        })
+        });
+    }
 
     scrapeResource = (url) => {
         scrape(url, (result) => {
@@ -144,7 +142,7 @@ class Home extends Component {
         return ( 
             <Container className = "homeBox" >
                 <SearchForm scrape = {this.scrapeResource}/>  
-                <SlideNav state = {this.state} addFavorite = {this.addFavorite} />
+                <SlideNav state = {this.state} addFavorite = {this.addFavorite} deleteFavorite= {this.deleteFavorite} />
                 {this.state.links.length ? <Range update ={this.updateLinkLength} linkLength ={this.state.links.length}/> : <></>}
                 <Canvas state = {this.state} scrape = {this.scrapeResource}/>  
                 <Map store = {this.state.rabbitHole} update = {this.updateState}/> 
