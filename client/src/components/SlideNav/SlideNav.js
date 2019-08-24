@@ -58,7 +58,7 @@ export default class SlideNav extends Component {
                             <span class="favorite">{favorite.title}</span>
                         
                             <a class='wiki' key={i} href={favorite.urlString} rel="noopener noreferrer" target="_blank"> wiki</a>
-                            <p onClick={this.props.deleteFavorite}>Delete Me</p>
+                            <p data-rabid={favorite._id}onClick={(e)=>this.props.deleteFavorite(e)}>Delete Me</p>
                             
                             </li>
                         
