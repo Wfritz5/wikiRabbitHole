@@ -2,7 +2,7 @@
   "short_name": "rabbitHole",
   "name": "wikiRabbitHole",
   "icons": [{
-    "src": "favicon.ico",
+    "src": "circle.ico",
     "type": "image/png"
   }],
   "start_url": "./index.html",
