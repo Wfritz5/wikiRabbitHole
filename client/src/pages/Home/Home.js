@@ -85,17 +85,23 @@ class Home extends Component {
             userId: this.state.userId,
             keywords: this.state.tags
         };
-        API.addUrl(this.state.userId, req).then(result=>{
-            let newFav = JSON.parse(result.config.data);
-            this.setState({
-                favorites:[...this.state.favorites, newFav]})
-        });
+        API.addUrl(this.state.userId, req).then(result => {
+            API.getUserById(this.state.userId).then(user => {
+                this.setState({
+                    loggedIn: true,
+                    username: user.data.username,
+                    userId: user.data._id,
+                    favorites: user.data.rabUrl
+                });
+            
+        })})
     }
 
     deleteFavorite = (e) => {
         let id = e.target.dataset.rabid;
         API.deleteUrl(id).then(result=>{
             API.getUserById(this.state.userId).then(user => {
+                
                 this.setState({
                     favorites: user.data.rabUrl
                 });
