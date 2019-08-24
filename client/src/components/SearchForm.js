@@ -107,11 +107,10 @@ class SearchForm extends Component {
         })
     }
 
-
-
     search = (event, url) => {
         event.preventDefault();
         this.props.scrape("https://en.wikipedia.org/wiki/" + url);
+        this.setState({term: ""})
     }
 
     random = (event) => {
