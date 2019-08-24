@@ -28,6 +28,9 @@ margin:0.5em;
 text-align:right;
 `;
 
+const Warning = styled.div`
+color:white;`;
+
 const Submit = styled.button`
 background-color:#000000;
 color:#DCDCDC;
@@ -47,14 +50,13 @@ margin:5em;
 
 const Rule = styled.hr`
 margin:1em;
+height:20%;
 `;
 
-const InputStyleL = {
-    marginLeft: 1 + "em"
-}
 const InputStyleR = {
-    marginLeft: -0.2 + "em"
+    margin: 0.2 + "em"
 }
+
 
 class Signup extends Component {
     state = {
@@ -116,7 +118,7 @@ class Signup extends Component {
                 <Title className="loginTitle title-font">Signup</Title>
                 <Rule></Rule>
                 {this.props.message ? (
-                    <alert className="animated fadeIn" color="danger">{this.props.message}</alert>
+                    <Warning className="animated fadeIn" color="danger">{this.props.message}</Warning>
                 ) : (<></>)}
                 <Form>
                     <FormGroup>
@@ -125,11 +127,11 @@ class Signup extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="password">Password</Label>
-                        <Input type="password" name="password" id="password" placeholder="password" value={this.props.password} onChange={this.props.handleInputChange} valid={this.state.validPassword} />
+                        <Input style={InputStyleR} type="password" name="password" id="password" placeholder="password" value={this.props.password} onChange={this.props.handleInputChange} valid={this.state.validPassword} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="confirmPassword">Confirm</Label>
-                        <Input style={InputStyleL} type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm password" value={this.props.confirmPassword} onChange={this.props.handleInputChange} valid={this.state.confirmPassword} />
+                        <Input style={InputStyleR} type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm password" value={this.props.confirmPassword} onChange={this.props.handleInputChange} valid={this.state.confirmPassword} />
                         <P><small>( at least 8 characters, 1 capital & 1 number )</small></P>
                     </FormGroup>
                     {/* if all fields are valid, allow the user to submit the form */}

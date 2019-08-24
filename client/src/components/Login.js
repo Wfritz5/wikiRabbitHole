@@ -10,6 +10,7 @@ border:none;
 `;
 const Rule = styled.hr`
 margin:1em;
+height:20%;
 `;
 const SignUp = styled.a`
 color:white;
@@ -46,7 +47,7 @@ text-align:right;
 `;
 
 const InputStyleR = {
-    marginLeft: 0.2 + "em"
+    margin: 0.2 + "em"
 }
 
 function Login(props) {
@@ -67,6 +68,7 @@ function Login(props) {
                         placeholder="username"
                         value={props.username}
                         onChange={props.handleInputChange}
+                        style={InputStyleR}
                     />
                 </FormGroup>
                 <FormGroup>
