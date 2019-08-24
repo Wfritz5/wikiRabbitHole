@@ -1,12 +1,10 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "type": "image/png"
-    }
-  ],
+  "short_name": "rabbitHole",
+  "name": "wikiRabbitHole",
+  "icons": [{
+    "src": "favicon.ico",
+    "type": "image/png"
+  }],
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
