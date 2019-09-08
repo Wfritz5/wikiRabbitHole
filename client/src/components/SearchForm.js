@@ -111,13 +111,13 @@ class SearchForm extends Component {
 
     search = (event, url) => {
         event.preventDefault();
-        this.props.scrape("https://en.wikipedia.org/wiki/" + url);
+        this.props.scrape(url);
         this.setState({term:""});
     }
 
     random = (event) => {
         event.preventDefault();
-        this.props.scrape("https://en.wikipedia.org/wiki/Special:Random");
+        this.props.scrape("Special:Random");
     }
 
     render() {

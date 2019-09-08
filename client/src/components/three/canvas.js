@@ -121,7 +121,7 @@ class Canvas extends Component {
         for (var i = 0; i < this.scene.children[0].children.length; i++) {
             if (this.intersects.length) {
                 if (this.intersects[0].object === this.scene.children[0].children[i]) {
-                    this.props.scrape("https://en." + this.scene.children[0].children[i].name)
+                    this.props.scrape(this.scene.children[0].children[i].name.slice(14).replace(/_/gi, " "))
                 }
             }
         }

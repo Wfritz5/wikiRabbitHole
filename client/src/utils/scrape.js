@@ -4,64 +4,47 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 export default async function scrape(url, cb) {
-  axios.get(url, {
-    validateStatus: function (status) {
-      return status < 500;
-    },
-    headers: {
-      'Access-Control-Allow-Origin': "*",
-      'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-id, Content-Length, X-Requested-With',
-    }
-  }).then(response => {
+  fetchResults(url);
+  function fetchResults(query) {
     const result = {};
-    if (response.status === 200) {
-    const linkArr = [];
-    const $ = cheerio.load(response.data);
-    $(".mw-body").each(function (i, element) {
-      result.title = $(this).children("h1#firstHeading").text();
-      result.summary = `${$(this).find("p").text().slice(0,300).replace(/ *\[[^\]]*]/, '')}...`;
-      result.image = $(this).find(".image").attr("href");
-      const links = $(this).find("a");
-      result.url = `https://wikipedia.org/wiki/${result.title.replace(/ /g, "_")}`;
-      // push all links into an array
-      $(links).each(function (i, link) {
-        linkArr.push(`${$(link).attr('href')}`)
-      });
-      // filter the links to grab good urls
-      const filteredLinks = linkArr.filter(link => link.includes(`/wiki/`) && !link.includes(`:`) &&
-        !link.includes(`%`) && !link.includes(`#`))
-      // grabs specified number of unique random numbers
-      if (filteredLinks.length < 20) {
-        result.randomLinks = randomLinkGenerator(filteredLinks, filteredLinks.length);
+    const randomQuery = `https://en.wikipedia.org/w/api.php?format=json&action=query&generator=random
+&grnnamespace=0&prop=links|pageimages|info|extracts&exintro&explaintext&pllimit=max&inprop=url&origin=*&grnlimit=1`;
+    const searchQuery = `https://en.wikipedia.org/w/api.php?action=query&titles=${query}&prop=links|pageimages|info|
+    extracts&exintro&explaintext&pllimit=max&inprop=url&utf8=&format=json&origin=*`
+      if (query === "Special:Random") {
+        query = randomQuery
       } else {
-        result.randomLinks = randomLinkGenerator(filteredLinks, 20);
+        query = searchQuery;
       }
-      // checks for a good image and then will grab its base code
-      if (result.image) {
-        result.image = `https://wikipedia.org${result.image}`;
-        axios.get(result.image).then(function (response) {
-          const $ = cheerio.load(response.data);
-          $(".fullImageLink").each(function (i, element) {
-            result.image = $(this).children("a").attr("href")
-            console.log(result)
-            cb(result);
-          });
-        }).catch(err => console.log(err));
-      } else {
-        result.image = noImage;
-        console.log(result)
-        cb(result);
-      }
-    });
-  } else {
-    result.title = "Page not found"
-    result.image = "";
-    result.url = "";
-    result.summary = "";
-    result.randomLinks = [];
-    cb(result);
-  }
-  }).catch(err => console.log(err));
-  
+        console.log(query)
+        fetch(query)
+            .then(response => response.json())
+            .then(data => {
+              const pageIdArr = [Object.keys(data.query.pages)[0]];
+              console.log(parseInt(pageIdArr[0]));
+              const pageId = parseInt(pageIdArr[0]);
+              const parsedData = data.query.pages[pageId];
+              console.log(parsedData)
+              // get links from the page and filter out any stubs or unwanted pages
+              const linkArr = parsedData.links;
+              const filteredLinks = linkArr.filter(link => !link.title.includes(`:`))
+              result.links = filteredLinks;
+              // grabs specified number of unique random numbers
+                if (filteredLinks.length < 20) {
+                  result.randomLinks = randomLinkGenerator(filteredLinks, filteredLinks.length);
+                } else {
+                  result.randomLinks = randomLinkGenerator(filteredLinks, 20);
+                }
+                if (parsedData.thumbnail) {
+                  result.image = parsedData.thumbnail.source;
+                } else {
+                  result.image = noImage;
+                }
+              result.title = parsedData.title;
+              result.url = parsedData.fullurl;
+              result.summary = parsedData.extract;
+              console.log(result)
+              cb(result);
+            }).catch(err => console.log(err));
+      } 
 }
