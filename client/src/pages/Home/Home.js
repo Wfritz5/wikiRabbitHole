@@ -124,7 +124,7 @@ class Home extends Component {
             for (let i = 0; i < 20; i++) {
                 if (result.randomLinks[i]) {
                     links.push(result.randomLinks[i]);
-                    linkTitles.push(result.randomLinks[i].slice(19).replace(/_/gi, " "));
+                    linkTitles.push(result.randomLinks[i].slice(14).replace(/_/gi, " "));
                 }
             }
             this.setState({

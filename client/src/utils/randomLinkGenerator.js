@@ -4,7 +4,7 @@ export default function randomLinkGenerator(links, num) {
     while (arr.length < num) {
       const r = Math.floor(Math.random() * links.length);
       if (arrIndex.indexOf(r) === -1) {
-      const randLink = `wikipedia.org${links[r]}`
+      const randLink = `wikipedia.org/${links[r].title.replace(/ /g,"_")}`
       arr.push(randLink);
       arrIndex.push(r);
       }

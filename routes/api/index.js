@@ -5,6 +5,6 @@ const scrapeRoutes = require("./scrape");
 
 router.use("/users", userRoutes);
 router.use("/raburl", raburlRoutes);
-//router.use("/scrape", scrapeRoutes);
+router.use("/scrape", scrapeRoutes);
 
 module.exports = router;
