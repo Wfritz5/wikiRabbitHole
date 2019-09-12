@@ -43,7 +43,7 @@ export default class SlideNav extends Component {
                     </button>
                     <article>
                         <img src={this.props.state.image} alt={this.state.title} />
-                        <p id="summary">{this.props.state.article}<a href={this.props.state.href}>more at Wikipedia</a></p>
+                        <p id="summary">{this.props.state.article}<a href={this.props.state.href}target="_blank">more at Wikipedia</a></p>
                        {this.props.state.loggedIn ? <p id="favorite" onClick={this.props.addFavorite}>{this.props.state.article ? "\u269d add to favorites" : ""}</p> : <></>}
 
                     </article>
